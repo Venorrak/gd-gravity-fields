@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://do7wo1cg7jrsb"]
+
+[ext_resource type="Script" uid="uid://ccmlyi6l7n2jy" path="res://GravityFields/3D/GravityField3D.gd" id="1_8uh7m"]
+[ext_resource type="Script" uid="uid://bue6y5t4w8wi3" path="res://GravityFields/3D/GravityShapes/ParallelGravity3D.gd" id="2_ppyta"]
+[ext_resource type="Script" uid="uid://ko2qvre1l0uw" path="res://GravityFields/3D/UniqueConvexPolygonShape3D.gd" id="3_ppyta"]
+
+[sub_resource type="Resource" id="Resource_ykrsh"]
+script = ExtResource("2_ppyta")
+width = 26.39
+length = 15.835
+height = 8.4
+mirror = null
+metadata/_custom_type_script = "uid://bue6y5t4w8wi3"
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g14j6"]
+resource_local_to_scene = true
+points = PackedVector3Array(-13.195, 0, 0, -13.195, 8.4, 0, 13.195, 8.4, 0, 13.195, 0, 0, 13.195, 0, 15.835, 13.195, 8.4, 15.835, -13.195, 8.4, 15.835, -13.195, 0, 15.835)
+script = ExtResource("3_ppyta")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vbegm"]
+resource_local_to_scene = true
+points = PackedVector3Array(-13.195, 0, 0, -13.195, -8.4, 0, 13.195, -8.4, 0, 13.195, 0, 0, 13.195, 0, 15.835, 13.195, -8.4, 15.835, -13.195, -8.4, 15.835, -13.195, 0, 15.835)
+script = ExtResource("3_ppyta")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GravityField3D" type="Node3D" parent="."]
+script = ExtResource("1_8uh7m")
+shape = SubResource("Resource_ykrsh")
+zoneGravity = 9.8
+metadata/_custom_type_script = "uid://ccmlyi6l7n2jy"
+
+[node name="@Area3D@29831" type="Area3D" parent="GravityField3D"]
+gravity_space_override = 3
+
+[node name="@CollisionShape3D@29830" type="CollisionShape3D" parent="GravityField3D/@Area3D@29831"]
+shape = SubResource("ConvexPolygonShape3D_g14j6")
+
+[node name="@Area3D@29833" type="Area3D" parent="GravityField3D"]
+gravity_space_override = 3
+gravity_point_center = Vector3(0, -1, 3.14159)
+gravity_direction = Vector3(0, -1, 3.14159)
+
+[node name="@CollisionShape3D@29832" type="CollisionShape3D" parent="GravityField3D/@Area3D@29833"]
+shape = SubResource("ConvexPolygonShape3D_vbegm")

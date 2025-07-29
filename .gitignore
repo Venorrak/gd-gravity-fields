@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+addons/
+.godot_ide/
+.editorconfig
+.export_presets.cfg
+*.import
+*.uid

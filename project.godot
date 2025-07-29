@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="gravity-fields"
+run/main_scene="uid://cfjvarqrj7u7b"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/native_method_override=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/_Godot-IDE_/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/_Godot-IDE_/plugins": "blue",
+"res://addons/_Godot-IDE_/plugins/": "blue",
+"res://addons/_Godot-IDE_/shared_resources/": "teal"
+}
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+3d/default_gravity=0.0
+3d/default_gravity_vector=Vector3(0, 0, 0)
+2d/default_gravity_vector=Vector2(0, 0)
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
