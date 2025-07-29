@@ -43,7 +43,7 @@ func rotateByTwist2(input: Vector3, index: int) -> Vector3:
 	
 func getShapes(gRotation: Vector3) -> Array[Dictionary]:
 	var sections : Array[Dictionary] = []
-	for i in increments + 1:
+	for i in increments:
 		var polygon : PackedVector3Array = [
 			rotateByTwist(Vector3(width / 2, 0, (length / increments) * i), i),
 			rotateByTwist(Vector3(width / 2, 0, (length / increments) * (i + 1)), i),
@@ -61,7 +61,7 @@ func getShapes(gRotation: Vector3) -> Array[Dictionary]:
 		}
 		sections.append(newSection)
 	if mirror:
-		for i in increments + 1:
+		for i in increments:
 			var polygon : PackedVector3Array = [
 				rotateByTwist2(Vector3(width / 2, 0, (length / increments) * i), i),
 				rotateByTwist2(Vector3(width / 2, 0, (length / increments) * (i + 1)), i),
