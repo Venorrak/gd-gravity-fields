@@ -2,15 +2,15 @@
 extends GravityShape3D
 class_name TwistGravity3D
 
-@export var width : float = 10:
+@export var width : float = 8:
 	set(value):
 		width = value
 		updateShape.emit()
-@export var length : float = 10:
+@export var length : float = 20:
 	set(value):
 		length = value
 		updateShape.emit()
-@export var height : float = 10:
+@export var height : float = 5:
 	set(value):
 		height = value
 		updateShape.emit()
@@ -18,7 +18,7 @@ class_name TwistGravity3D
 	set(value):
 		rotation = value
 		updateShape.emit()
-@export_range(1, 1000, 1) var increments : int = 360:
+@export_range(1, 1000, 1) var increments : int = 20:
 	set(value):
 		increments = value
 		updateShape.emit()
@@ -28,9 +28,9 @@ class_name TwistGravity3D
 		updateShape.emit()
 
 func rotateByParent(input: Vector3, gRotation: Vector3) -> Vector3:
-	input.x += gRotation.x
-	input.y += gRotation.y
-	input.z += gRotation.z
+	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
+	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
+	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
 	return input
 
 func rotateByTwist(input: Vector3, index: int) -> Vector3:

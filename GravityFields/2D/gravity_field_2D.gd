@@ -40,7 +40,7 @@ signal body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, loc
 	set(newEffects):
 		effects = newEffects
 		updateShapes()
-@export var zoneGravity : float:
+@export var zoneGravity : float = 9.8:
 	set(newGravity):
 		zoneGravity = newGravity
 		updateShapes()

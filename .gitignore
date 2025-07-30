@@ -7,3 +7,6 @@ addons/
 .export_presets.cfg
 *.import
 *.uid
+player_3d.gd
+test3D.tscn
+player_3d.tscn

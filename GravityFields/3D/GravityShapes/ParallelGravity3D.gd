@@ -20,15 +20,15 @@ class_name ParallelGravity3D
 		updateShape.emit()
 
 func rotateByParent(input: Vector3, gRotation: Vector3) -> Vector3:
-	input.x += gRotation.x
-	input.y += gRotation.y
-	input.z += gRotation.z
+	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
+	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
+	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
 	return input
 	
 func rotateByParentReversed(input: Vector3, gRotation: Vector3) -> Vector3:
-	input.x += gRotation.x
-	input.y += gRotation.y
-	input.z += gRotation.z + deg_to_rad(180)
+	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
+	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
+	input = input.rotated(Vector3(0, 0, 1), gRotation.z + deg_to_rad(180))
 	return input
 
 func getShapes(gRotation: Vector3) -> Array[Dictionary]:
