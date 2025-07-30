@@ -34,11 +34,11 @@ func rotateByParent(input: Vector3, gRotation: Vector3) -> Vector3:
 	return input
 
 func rotateByTwist(input: Vector3, index: int) -> Vector3:
-	var tRotation : float = (deg_to_rad(rotation) / float(increments)) * index
+	var tRotation : float = (deg_to_rad(rotation) / float(increments - 1)) * index
 	return input.rotated(Vector3(0, 0, 1), tRotation)
 
 func rotateByTwist2(input: Vector3, index: int) -> Vector3:
-	var tRotation : float = (deg_to_rad(rotation) / float(increments)) * index
+	var tRotation : float = (deg_to_rad(rotation) / float(increments - 1)) * index
 	return input.rotated(Vector3(0, 0, 1), tRotation + deg_to_rad(180))
 	
 func getShapes(gRotation: Vector3) -> Array[Dictionary]:

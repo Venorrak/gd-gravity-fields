@@ -29,13 +29,14 @@ signal body_shape_exited(body_rid: RID, body: Node3D, body_shape_index: int, loc
 		updateShapes()
 @export var shape : GravityShape3D = TwistGravity3D.new():
 	set(newShape):
-		if shape:
+		if shape and Engine.is_editor_hint():
 			shape.updateShape.disconnect(updateShapes)
 		shape = newShape
-		clearShapes()
-		if newShape:
-			newShape.updateShape.connect(updateShapes)
-			createShapes()
+		if Engine.is_editor_hint():
+			clearShapes()
+			if newShape:
+				newShape.updateShape.connect(updateShapes)
+				createShapes()
 @export var effects : bool = true:
 	set(newEffects):
 		effects = newEffects
@@ -148,7 +149,6 @@ func createShapes() -> void:
 		add_child(newArea)
 		newArea.owner = get_parent()
 		newCollision.owner = get_parent()
-		
 	
 func mock_area_entered(area: Area3D) -> void:
 	area_entered.emit(area)
@@ -172,4 +172,4 @@ func mock_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int,
 	body_shape_entered.emit(body_rid, body, body_shape_index, local_shape_index)
 
 func mock_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	body_shape_exited.emit(body_rid, body, body_shape_index, local_shape_index)	
+	body_shape_exited.emit(body_rid, body, body_shape_index, local_shape_index)
