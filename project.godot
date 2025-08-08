@@ -19,10 +19,6 @@ config/icon="res://icon.svg"
 
 gdscript/warnings/native_method_override=1
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/_Godot-IDE_/plugin.cfg")
-
 [file_customization]
 
 folder_colors={
