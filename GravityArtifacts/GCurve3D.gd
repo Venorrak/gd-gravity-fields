@@ -26,7 +26,7 @@ func _get_property_list():
 			})
 		return ret
 
-func get_gravity(bodyPosition : Vector3) -> Vector3:
+func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
 	var gravity : Vector3 = Vector3.DOWN * gravityForce
 	var closestOffset : float = get_closest_offset(bodyPosition)
 	var closestTransform : Transform3D = sample_baked_with_rotation(closestOffset, false, true)

@@ -9,7 +9,7 @@ func _init() -> void:
 
 func get_custom_gravity() -> Vector3:
 	if gravityProvider:
-		return gravityProvider.get_gravity(global_position) * customGravityScale
+		return gravityProvider.get_custom_gravity(global_position) * customGravityScale
 	else:
 		return Vector3.ZERO
 
