@@ -26,7 +26,7 @@ func _get_property_list():
 			})
 		return ret
 
-func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
+func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Vector3:
 	var gravity : Vector3 = Vector3.DOWN * gravityForce
 	var closestOffset : float = get_closest_offset(bodyPosition)
 	var closestTransform : Transform3D = sample_baked_with_rotation(closestOffset, false, true)
@@ -68,4 +68,13 @@ func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
 		gravity = up.rotated(forward, gravity_angle) * gravityForce
 	else:
 		gravity = (bodyPosition - closestTransform.origin).normalized() * gravityForce
-	return gravity
+	print(providerRotation)
+	return rotateByProvider(gravity, providerRotation)
+
+func rotateByProvider(input: Vector3, gRotation: Vector3) -> Vector3:
+	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
+	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
+	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
+	return input
+
+# TODO https://docs.godotengine.org/en/stable/tutorials/plugins/editor/3d_gizmos.html

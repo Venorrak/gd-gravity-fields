@@ -37,7 +37,13 @@ func _get_property_list():
 		return ret
 
 func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
-	return gravity_direction * gravityForce
+	return rotateByProvider(gravity_direction * gravityForce, global_rotation)
+
+func rotateByProvider(input: Vector3, gRotation: Vector3) -> Vector3:
+	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
+	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
+	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
+	return input
 
 func _init() -> void:
 	body_entered.connect(_body_entered)
