@@ -68,10 +68,9 @@ func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Ve
 		gravity = up.rotated(forward, gravity_angle) * gravityForce
 	else:
 		gravity = (bodyPosition - closestTransform.origin).normalized() * gravityForce
-	print(providerRotation)
-	return rotateByProvider(gravity, providerRotation)
+	return gravity
 
-func rotateByProvider(input: Vector3, gRotation: Vector3) -> Vector3:
+func rotateByProvider(input, gRotation: Vector3):
 	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
 	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
 	input = input.rotated(Vector3(0, 0, 1), gRotation.z)

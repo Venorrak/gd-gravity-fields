@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://cfjvarqrj7u7b"]
 
 [ext_resource type="PackedScene" uid="uid://ix5blfhoeo1k" path="res://player.tscn" id="1_vfvc6"]
-[ext_resource type="Script" uid="uid://nyi6kbgxofl2" path="res://GravityFields/2D/gravity_field_2D.gd" id="2_qih2i"]
-[ext_resource type="Script" uid="uid://b1nlmf2mg6uby" path="res://GravityFields/2D/GravityShapes/SandwishGravity2D.gd" id="3_2pks0"]
-[ext_resource type="Script" uid="uid://nctr78u8doyc" path="res://GravityFields/2D/GravityShapes/PieGravity2D.gd" id="4_yerdr"]
-[ext_resource type="Script" uid="uid://c0sxk45csjx04" path="res://GravityFields/2D/CustomCollisionShapes/CornerShape.gd" id="5_yerdr"]
-[ext_resource type="Script" uid="uid://ddpc717335jdh" path="res://GravityFields/2D/GravityShapes/SquareGravity2D.gd" id="6_ow83g"]
-[ext_resource type="Script" uid="uid://61jc7voyjql5" path="res://GravityFields/2D/GravityShapes/CircleGravity2D.gd" id="7_kshcw"]
+[ext_resource type="Script" uid="uid://0sfmj4pprpfa" path="res://GravityFields/2D/gravity_field_2D.gd" id="2_qih2i"]
+[ext_resource type="Script" uid="uid://bwn4pvbqnoxrx" path="res://GravityFields/2D/GravityShapes/SandwishGravity2D.gd" id="3_2pks0"]
+[ext_resource type="Script" uid="uid://b1mbkfoan0jn0" path="res://GravityFields/2D/GravityShapes/PieGravity2D.gd" id="4_yerdr"]
+[ext_resource type="Script" uid="uid://d73e43yqts7i" path="res://GravityFields/2D/CustomCollisionShapes/CornerShape.gd" id="5_yerdr"]
+[ext_resource type="Script" uid="uid://ppwqqr2sbh8o" path="res://GravityFields/2D/GravityShapes/SquareGravity2D.gd" id="6_ow83g"]
+[ext_resource type="Script" uid="uid://ds01vqkpehlsd" path="res://GravityFields/2D/GravityShapes/CircleGravity2D.gd" id="7_kshcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijgdv"]
 size = Vector2(350, 50)
@@ -103,7 +103,6 @@ shape = SubResource("Resource_ow83g")
 zoneGravity = 980.0
 layer = 3
 mask = 3
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(358, 523)
@@ -117,7 +116,6 @@ script = ExtResource("2_qih2i")
 priority = 1
 shape = SubResource("Resource_tiqs3")
 zoneGravity = 980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2(708, 423)
@@ -126,13 +124,11 @@ position = Vector2(708, 423)
 script = ExtResource("2_qih2i")
 shape = SubResource("Resource_2pks0")
 zoneGravity = -980.1
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="GravityField2" type="Node2D" parent="StaticBody2D3"]
 script = ExtResource("2_qih2i")
 shape = SubResource("Resource_yerdr")
 zoneGravity = 980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="CornerCollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
 polygon = PackedVector2Array(75, 0, 74.8972, 3.9252, 74.5891, 7.83963, 74.0766, 11.7326, 73.3611, 15.5934, 72.4444, 19.4114, 71.3292, 23.1763, 70.0185, 26.8776, 68.5159, 30.5052, 66.8255, 34.0493, 64.9519, 37.5, 62.9003, 40.8479, 60.6763, 44.0839, 58.286, 47.199, 55.7359, 50.1848, 53.033, 53.033, 50.1848, 55.7359, 47.199, 58.2859, 44.0839, 60.6763, 40.8479, 62.9003, 37.5, 64.9519, 34.0493, 66.8255, 30.5053, 68.5159, 26.8776, 70.0185, 23.1763, 71.3292, 19.4114, 72.4444, 15.5934, 73.3611, 11.7326, 74.0766, 7.83965, 74.5891, 3.92521, 74.8972, 1.70096e-05, 75, 2.8355e-05, 125.025, 6.54333, 124.854, 13.0687, 124.34, 19.5582, 123.486, 25.9942, 122.293, 32.3589, 120.765, 38.6349, 118.906, 44.805, 116.721, 50.8523, 114.216, 56.7602, 111.398, 62.5125, 108.275, 68.0935, 104.855, 73.4879, 101.147, 78.6808, 97.1627, 83.6581, 92.9117, 88.406, 88.406, 92.9117, 83.658, 97.1627, 78.6808, 101.147, 73.4878, 104.855, 68.0935, 108.275, 62.5125, 111.398, 56.7602, 114.216, 50.8522, 116.721, 44.8049, 118.906, 38.6348, 120.765, 32.3588, 122.293, 25.9942, 123.486, 19.5582, 124.34, 13.0687, 124.854, 6.5433, 125.025, 0)
@@ -141,7 +137,6 @@ length = 150.0
 width = 1.667
 degree = 90.0
 sampling = 30
-metadata/_custom_type_script = "uid://c0sxk45csjx04"
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2(808, 348)
@@ -155,7 +150,6 @@ script = ExtResource("2_qih2i")
 priority = 2
 shape = SubResource("Resource_kshcw")
 zoneGravity = 980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(691, 273)
@@ -168,7 +162,6 @@ length = 183.105
 width = 1.55
 degree = 120.0
 sampling = 14
-metadata/_custom_type_script = "uid://c0sxk45csjx04"
 
 [node name="GravityField" type="Node2D" parent="StaticBody2D5"]
 rotation = -2.0944
@@ -176,14 +169,12 @@ script = ExtResource("2_qih2i")
 priority = 1
 shape = SubResource("Resource_ijgdv")
 zoneGravity = -980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="GravityField2" type="Node2D" parent="StaticBody2D5"]
 rotation = -2.0944
 script = ExtResource("2_qih2i")
 shape = SubResource("Resource_bmjtd")
 zoneGravity = 980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 position = Vector2(379, 216)
@@ -195,7 +186,6 @@ shape = SubResource("RectangleShape2D_ub64p")
 script = ExtResource("2_qih2i")
 shape = SubResource("Resource_wevra")
 zoneGravity = 980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
 
 [node name="GravityField" type="Node2D" parent="."]
 visible = false
@@ -204,4 +194,3 @@ script = ExtResource("2_qih2i")
 priority = -1
 shape = SubResource("Resource_oip1d")
 zoneGravity = 980.0
-metadata/_custom_type_script = "uid://nyi6kbgxofl2"
