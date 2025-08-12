@@ -28,8 +28,10 @@ func _get_property_list():
 
 func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Vector3:
 	var gravity : Vector3 = Vector3.DOWN * gravityForce
-	var closestOffset : float = get_closest_offset(bodyPosition)
+	var rotatedBodyPosition = rotateByProvider(bodyPosition, providerRotation * -1)
+	var closestOffset : float = get_closest_offset(rotatedBodyPosition)
 	var closestTransform : Transform3D = sample_baked_with_rotation(closestOffset, false, true)
+	closestTransform = rotate_transform_by_provider(closestTransform, providerRotation)
 	if multipleFaces:
 		var center: Vector3 = closestTransform.origin
 		var up: Vector3 = closestTransform.basis.y.normalized()
@@ -49,30 +51,27 @@ func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Ve
 			to_body_plane.dot(up)
 		)
 
+		angle += step / 2
+			
 		if angle < 0:
 			angle += TAU
-
-		if faces % 2 == 0:
-			angle += step / 2
-			if angle > TAU:
-				angle -= TAU
+		
+		if angle > TAU:
+			angle -= TAU
 
 		var index: int = int(floor(angle / step)) % faces
-		if faces % 2 != 0:
-			index += 1
+		#print(index)
 		
 		var gravity_angle = -step * index
-		if faces % 2 != 0:
-			gravity_angle += step / 2
 		
-		gravity = up.rotated(forward, gravity_angle) * gravityForce
+		gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
 	else:
-		gravity = (bodyPosition - closestTransform.origin).normalized() * gravityForce
+		gravity = (closestTransform.origin - bodyPosition).normalized() * gravityForce
 	return gravity
 
 func rotateByProvider(input, gRotation: Vector3):
-	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
 	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
+	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
 	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
 	return input
 

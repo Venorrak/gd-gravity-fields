@@ -112,7 +112,7 @@ shadow_enabled = true
 environment = SubResource("Environment_xe411")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0, 0, 0)
 curve = SubResource("Curve3D_ou1c5")
 script = ExtResource("2_wuppg")
 
@@ -120,7 +120,7 @@ script = ExtResource("2_wuppg")
 script = ExtResource("3_xe411")
 
 [node name="pill_cylindre" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pill_cylindre"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -141,7 +141,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("CylinderShape3D_xe411")
 
 [node name="cube" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.9112, 0, 40.7296)
+transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 100, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cube"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -162,7 +162,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("BoxShape3D_6mpf0")
 
 [node name="platform" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.6903, 0, 32.5135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.0767, 0, 31.5896)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -201,7 +201,7 @@ gravityForce = 9.8
 shape = SubResource("BoxShape3D_ndvhq")
 
 [node name="pentagon" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.96781, 0, 60.5696)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.8647, 0, 64.7731)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pentagon"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -222,7 +222,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("BoxShape3D_y26re")
 
 [node name="triangle" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.1254, 9.53674e-07, -34.9756)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.06, 0, -56.1323)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="triangle"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -259,7 +259,7 @@ gravityProvider = NodePath("../../GravityPoint3D")
 shape = SubResource("SphereShape3D_ryfo5")
 
 [node name="GravityBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("arrow")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6356, 4.48481, 0.67004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48619, 3.39809, 4.75515)
 gravity_scale = 0.0
 script = ExtResource("5_y26re")
 arrow = NodePath("ShapeCast3D")
