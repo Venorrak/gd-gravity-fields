@@ -26,20 +26,22 @@ func _get_property_list():
 			})
 		return ret
 
-func get_custom_gravity(localBodyPosition : Vector3, providerTransform: Transform3D) -> Vector3:
-	var gravity : Vector3 = Vector3.DOWN * gravityForce
-	var rotatedBodyPosition = rotateByProvider(localBodyPosition, providerTransform.basis.get_euler() * -1)
-	var closestOffset : float = get_closest_offset(rotatedBodyPosition)
-	var closestTransform : Transform3D = sample_baked_with_rotation(closestOffset, false, true)
-	closestTransform = rotateByProvider(closestTransform, providerTransform.basis.get_euler())
+func get_custom_gravity(local_body_position: Vector3, provider_transform: Transform3D) -> Vector3:
+	var gravity: Vector3 = Vector3.DOWN * gravityForce
+	var rotated_body_position = rotate_by_provider(local_body_position, provider_transform, true)
+	var closest_offset: float = get_closest_offset(rotated_body_position)
+	var closest_transform: Transform3D = sample_baked_with_rotation(closest_offset, false, true)
+	closest_transform = rotate_by_provider(closest_transform, provider_transform, false)
+	# Convert local_body_position to world position for gravity direction
+	var body_world_pos = provider_transform.origin + local_body_position
 	if multipleFaces:
-		var center: Vector3 = closestTransform.origin
-		var up: Vector3 = closestTransform.basis.y.normalized()
+		var center: Vector3 = closest_transform.origin
+		var up: Vector3 = closest_transform.basis.y.normalized()
 		var step : float = TAU / faces
-		var forward : Vector3 = closestTransform.basis.z.normalized()
-		var side : Vector3 = closestTransform.basis.x.normalized()
+		var forward : Vector3 = closest_transform.basis.z.normalized()
+		var side : Vector3 = closest_transform.basis.x.normalized()
 		
-		var to_body: Vector3 = (localBodyPosition - center)
+		var to_body: Vector3 = (local_body_position - center)
 		
 		# Project to_body vector onto the plane orthogonal to forward (remove the forward component)
 		var to_body_plane: Vector3 = to_body - forward * to_body.dot(forward)
@@ -66,13 +68,64 @@ func get_custom_gravity(localBodyPosition : Vector3, providerTransform: Transfor
 		
 		gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
 	else:
-		gravity = (closestTransform.origin - localBodyPosition).normalized() * gravityForce
+		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce
 	return gravity
 
-func rotateByProvider(input, gRotation: Vector3):
-	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
-	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
-	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
-	return input
+
+func rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
+	var clean_basis : Basis = provider_transform.basis.orthonormalized()
+
+	if typeof(input) == TYPE_VECTOR3:
+		if inverse:
+			return clean_basis.inverse() * input
+		else:
+			return clean_basis * input
+
+	elif typeof(input) == TYPE_TRANSFORM3D:
+		var clean_provider : Transform3D = Transform3D(clean_basis, provider_transform.origin)
+		if inverse:
+			return clean_provider.affine_inverse() * input
+		else:
+			return clean_provider * input
+
+	else:
+		push_error("rotate_by_provider() only supports Vector3 or Transform3D")
+		return input
+
 
 # TODO https://docs.godotengine.org/en/stable/tutorials/plugins/editor/3d_gizmos.html
+
+#if multipleFaces:
+		#var center: Vector3 = closestTransform.origin
+		#var up: Vector3 = closestTransform.basis.y.normalized()
+		#var step : float = TAU / faces
+		#var forward : Vector3 = closestTransform.basis.z.normalized()
+		#var side : Vector3 = closestTransform.basis.x.normalized()
+		#
+		#var to_body: Vector3 = (localBodyPosition - center)
+		#
+		## Project to_body vector onto the plane orthogonal to forward (remove the forward component)
+		#var to_body_plane: Vector3 = to_body - forward * to_body.dot(forward)
+		#to_body_plane = to_body_plane.normalized()
+#
+		## Get angle between 'up' and projected vector
+		#var angle: float = atan2(
+			#to_body_plane.dot(side),
+			#to_body_plane.dot(up)
+		#)
+#
+		#angle += step / 2
+			#
+		#if angle < 0:
+			#angle += TAU
+		#
+		#if angle > TAU:
+			#angle -= TAU
+#
+		#var index: int = int(floor(angle / step)) % faces
+		##print(index)
+		#
+		#var gravity_angle = -step * index
+		#
+		#gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
+	#else:

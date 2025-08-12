@@ -37,13 +37,27 @@ func _get_property_list():
 		return ret
 
 func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
-	return rotateByProvider(gravity_direction * gravityForce, global_rotation)
+	return rotate_by_provider(gravity_direction * gravityForce, global_transform)
 
-func rotateByProvider(input: Vector3, gRotation: Vector3) -> Vector3:
-	input = input.rotated(Vector3(1, 0, 0), gRotation.x)
-	input = input.rotated(Vector3(0, 1, 0), gRotation.y)
-	input = input.rotated(Vector3(0, 0, 1), gRotation.z)
-	return input
+func rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
+	var clean_basis : Basis = provider_transform.basis.orthonormalized()
+
+	if typeof(input) == TYPE_VECTOR3:
+		if inverse:
+			return clean_basis.inverse() * input
+		else:
+			return clean_basis * input
+
+	elif typeof(input) == TYPE_TRANSFORM3D:
+		var clean_provider : Transform3D = Transform3D(clean_basis, provider_transform.origin)
+		if inverse:
+			return clean_provider.affine_inverse() * input
+		else:
+			return clean_provider * input
+
+	else:
+		push_error("rotate_by_provider() only supports Vector3 or Transform3D")
+		return input
 
 func _init() -> void:
 	body_entered.connect(_body_entered)
