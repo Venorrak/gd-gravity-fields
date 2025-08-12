@@ -26,12 +26,12 @@ func _get_property_list():
 			})
 		return ret
 
-func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Vector3:
+func get_custom_gravity(localBodyPosition : Vector3, providerTransform: Transform3D) -> Vector3:
 	var gravity : Vector3 = Vector3.DOWN * gravityForce
-	var rotatedBodyPosition = rotateByProvider(bodyPosition, providerRotation * -1)
+	var rotatedBodyPosition = rotateByProvider(localBodyPosition, providerTransform.basis.get_euler() * -1)
 	var closestOffset : float = get_closest_offset(rotatedBodyPosition)
 	var closestTransform : Transform3D = sample_baked_with_rotation(closestOffset, false, true)
-	closestTransform = rotate_transform_by_provider(closestTransform, providerRotation)
+	closestTransform = rotateByProvider(closestTransform, providerTransform.basis.get_euler())
 	if multipleFaces:
 		var center: Vector3 = closestTransform.origin
 		var up: Vector3 = closestTransform.basis.y.normalized()
@@ -39,7 +39,7 @@ func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Ve
 		var forward : Vector3 = closestTransform.basis.z.normalized()
 		var side : Vector3 = closestTransform.basis.x.normalized()
 		
-		var to_body: Vector3 = (bodyPosition - center)
+		var to_body: Vector3 = (localBodyPosition - center)
 		
 		# Project to_body vector onto the plane orthogonal to forward (remove the forward component)
 		var to_body_plane: Vector3 = to_body - forward * to_body.dot(forward)
@@ -66,7 +66,7 @@ func get_custom_gravity(bodyPosition : Vector3, providerRotation: Vector3) -> Ve
 		
 		gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
 	else:
-		gravity = (closestTransform.origin - bodyPosition).normalized() * gravityForce
+		gravity = (closestTransform.origin - localBodyPosition).normalized() * gravityForce
 	return gravity
 
 func rotateByProvider(input, gRotation: Vector3):
