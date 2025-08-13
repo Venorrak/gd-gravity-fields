@@ -1,11 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://do7wo1cg7jrsb"]
+[gd_scene load_steps=35 format=3 uid="uid://do7wo1cg7jrsb"]
 
-[ext_resource type="Script" uid="uid://c3koaywr45phy" path="res://GravityArtifacts/GCurve3D.gd" id="1_jhyt1"]
-[ext_resource type="Script" uid="uid://c8e6edlr3a3k5" path="res://GravityArtifacts/GravityDetector.gd" id="2_ou1c5"]
-[ext_resource type="Script" uid="uid://dyog5drak75wm" path="res://GravityArtifacts/GPath3D.gd" id="2_wuppg"]
-[ext_resource type="Script" uid="uid://dl4i275qoun1w" path="res://GravityArtifacts/GravityPoint3D.gd" id="3_xe411"]
+[ext_resource type="Script" uid="uid://c3koaywr45phy" path="res://addons/gravityfields/GCurve3D.gd" id="1_jhyt1"]
+[ext_resource type="Script" uid="uid://c8e6edlr3a3k5" path="res://addons/gravityfields/GravityDetector.gd" id="2_ou1c5"]
+[ext_resource type="Script" uid="uid://dyog5drak75wm" path="res://addons/gravityfields/GPath3D.gd" id="2_wuppg"]
+[ext_resource type="Script" uid="uid://dl4i275qoun1w" path="res://addons/gravityfields/GravityPoint3D.gd" id="3_xe411"]
 [ext_resource type="Script" uid="uid://vmtfp3olyfrh" path="res://player3d.gd" id="5_y26re"]
 [ext_resource type="Script" uid="uid://diqcbgwwavtsx" path="res://cam.gd" id="6_y26re"]
+[ext_resource type="Script" uid="uid://bml7bm4o78erx" path="res://meshCollision.gd" id="7_6mpf0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bfqwq"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -21,16 +22,23 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_ou1c5"]
+closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
+"points": PackedVector3Array(0, 0, -2.5, 0, 0, 2.5, 3.75, 0, 0, 2.5, 0, 0, -2.5, 0, 0, 0, 0, 3.75, 0, 0, 2.5, 0, 0, -2.5, -3.75, 0, 0, -2.5, 0, 0, 2.5, 0, 0, 0, 0, -3.75),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
 }
-point_count = 2
+point_count = 4
 script = ExtResource("1_jhyt1")
 gravityForce = 2.0
-multipleFaces = true
-faces = 5
+multipleFaces = false
 metadata/_custom_type_script = "uid://cmavu2d5cqxkq"
+
+[sub_resource type="TorusMesh" id="TorusMesh_ryfo5"]
+inner_radius = 2.5
+outer_radius = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nlr5m"]
+size = Vector3(19.23, 7.445, 19.92)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wuppg"]
 radius = 5.0
@@ -113,12 +121,24 @@ shadow_enabled = true
 environment = SubResource("Environment_xe411")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0, 0, 0)
 curve = SubResource("Curve3D_ou1c5")
 script = ExtResource("2_wuppg")
 
 [node name="GravityPoint3D" type="Marker3D" parent="."]
 script = ExtResource("3_xe411")
+
+[node name="taurusm" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_ryfo5")
+skeleton = NodePath("")
+script = ExtResource("7_6mpf0")
+
+[node name="GravityDetector" type="Area3D" parent="taurusm" node_paths=PackedStringArray("gravityProvider")]
+script = ExtResource("2_ou1c5")
+gravityProvider = NodePath("../../Path3D")
+metadata/_custom_type_script = "uid://c8e6edlr3a3k5"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="taurusm/GravityDetector"]
+shape = SubResource("BoxShape3D_nlr5m")
 
 [node name="pill_cylindre" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 100, 0, 0)
@@ -184,7 +204,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("BoxShape3D_6mpf0")
 
 [node name="platform2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.707107, -0.707107, 0, 0.5, 0.5, -0.707107, 0.5, 0.5, 0.707107, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2646, 0, -66.7517)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform2"]
 shape = SubResource("BoxShape3D_ryfo5")
@@ -202,7 +222,7 @@ gravityForce = 9.8
 shape = SubResource("BoxShape3D_ndvhq")
 
 [node name="pentagon" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0, 0, 85.7417)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 85.7417)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pentagon"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -260,8 +280,9 @@ gravityProvider = NodePath("../../GravityPoint3D")
 shape = SubResource("SphereShape3D_ryfo5")
 
 [node name="GravityBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("arrow")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10553, -1.74012, -1.20023)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.57306)
 gravity_scale = 0.0
+linear_velocity = Vector3(3.5, 1, 0)
 script = ExtResource("5_y26re")
 arrow = NodePath("ShapeCast3D")
 metadata/_custom_type_script = "uid://bwpsq87vpo1wk"
@@ -275,5 +296,5 @@ mesh = SubResource("SphereMesh_bfqwq")
 [node name="ShapeCast3D" type="ShapeCast3D" parent="GravityBody3D"]
 
 [node name="FreeLookCamera" type="Camera3D" parent="."]
-transform = Transform3D(0.198239, 0, -0.980154, 0, 1, 0, 0.980154, 0, 0.198239, -19.6297, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.974268, 0.225393, 0, -0.225393, 0.974268, 3.30504, 2.44998, 10.6842)
 script = ExtResource("6_y26re")

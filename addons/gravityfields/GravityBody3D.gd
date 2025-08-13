@@ -1,3 +1,4 @@
+@tool
 class_name GravityBody3D extends RigidBody3D
 
 @export var customGravityScale : float = 1

@@ -1,3 +1,4 @@
+@tool
 class_name GravityPoint3D extends Marker3D
 
 @export var gravityForce : float = 9.8

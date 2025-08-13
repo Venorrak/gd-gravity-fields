@@ -64,7 +64,7 @@ func _init() -> void:
 	body_exited.connect(_body_exited)
 	update_configuration_warnings()
 	notify_property_list_changed()
-	
+
 func _body_entered(body : Node3D) -> void:
 	if body is GravityBody3D:
 		body.gravityProvider = gravityProvider
