@@ -4,6 +4,8 @@
 It's a system allowing you to easily have a mario galaxy gravity mechanic in your game.
 You can create different zones with their own gravity that will affect the player.
 
+***The code is in addons/gravityfields, any other code is for tests***
+
 ## How does it work
 Before going into it, here's words and definitions:
 - Provider -> Node that applies gravity to the body
