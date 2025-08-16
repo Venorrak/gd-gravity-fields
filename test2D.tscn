@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://cfjvarqrj7u7b"]
 
 [ext_resource type="PackedScene" uid="uid://ix5blfhoeo1k" path="res://player.tscn" id="1_vfvc6"]
-[ext_resource type="Script" uid="uid://0sfmj4pprpfa" path="res://GravityFields/2D/gravity_field_2D.gd" id="2_qih2i"]
-[ext_resource type="Script" uid="uid://bwn4pvbqnoxrx" path="res://GravityFields/2D/GravityShapes/SandwishGravity2D.gd" id="3_2pks0"]
-[ext_resource type="Script" uid="uid://b1mbkfoan0jn0" path="res://GravityFields/2D/GravityShapes/PieGravity2D.gd" id="4_yerdr"]
-[ext_resource type="Script" uid="uid://d73e43yqts7i" path="res://GravityFields/2D/CustomCollisionShapes/CornerShape.gd" id="5_yerdr"]
-[ext_resource type="Script" uid="uid://ppwqqr2sbh8o" path="res://GravityFields/2D/GravityShapes/SquareGravity2D.gd" id="6_ow83g"]
-[ext_resource type="Script" uid="uid://ds01vqkpehlsd" path="res://GravityFields/2D/GravityShapes/CircleGravity2D.gd" id="7_kshcw"]
+[ext_resource type="Script" uid="uid://nyi6kbgxofl2" path="res://GravityFields/2D/gravity_field_2D.gd" id="2_qih2i"]
+[ext_resource type="Script" uid="uid://b1nlmf2mg6uby" path="res://GravityFields/2D/GravityShapes/SandwishGravity2D.gd" id="3_2pks0"]
+[ext_resource type="Script" uid="uid://nctr78u8doyc" path="res://GravityFields/2D/GravityShapes/PieGravity2D.gd" id="4_yerdr"]
+[ext_resource type="Script" uid="uid://c0sxk45csjx04" path="res://GravityFields/2D/CustomCollisionShapes/CornerShape.gd" id="5_yerdr"]
+[ext_resource type="Script" uid="uid://ddpc717335jdh" path="res://GravityFields/2D/GravityShapes/SquareGravity2D.gd" id="6_ow83g"]
+[ext_resource type="Script" uid="uid://61jc7voyjql5" path="res://GravityFields/2D/GravityShapes/CircleGravity2D.gd" id="7_kshcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijgdv"]
 size = Vector2(350, 50)
