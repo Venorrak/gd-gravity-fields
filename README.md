@@ -4,7 +4,31 @@
 It's a system allowing you to easily have a mario galaxy gravity mechanic in your game.
 You can create different zones with their own gravity that will affect the player.
 
-***The code is in addons/gravityfields, any other code is for tests***
+### ***The code is in addons/gravityfields, any other code is for tests***
+
+## What you can do
+Here is a list of demos :
+
+Parallel Gravity
+
+![](media/Screen%20Recording%202025-08-15%20234537.gif)
+
+Sphere Gravity
+
+![](media/Screen%20Recording%202025-08-15%20234741.gif)
+
+Taurus Gravity
+
+![](media/Screen%20Recording%202025-08-15%20234916.gif)
+
+Pill shaped gravity
+
+![](media/Screen%20Recording%202025-08-15%20235157.gif)
+
+Other shapes
+
+![](media/Screen%20Recording%202025-08-15%20235527.gif)
+
 
 ## How does it work
 Before going into it, here's words and definitions:
@@ -40,7 +64,7 @@ For parallel gravity, you can assign the GravityDetector's provider to itself of
 You will also have a custom gizmo for each GravityProvider
 
 ### GPath3D
-no faces
+no faces (Taurus)
 ![gizmo circle](media/Screenshot%202025-08-15%20233412.png)
 
 3 faces
@@ -49,19 +73,5 @@ no faces
 ### GravityPoint3D
 ![gizmo point](media/Screenshot%202025-08-15%20233510.png)
 
-
-## What you can do
-Here is a list of demos :
-
-![](media/Screen%20Recording%202025-08-15%20234537.gif)
-
-![](media/Screen%20Recording%202025-08-15%20234741.gif)
-
-![](media/Screen%20Recording%202025-08-15%20234916.gif)
-
-![](media/Screen%20Recording%202025-08-15%20235157.gif)
-
-![](media/Screen%20Recording%202025-08-15%20235527.gif)
-
 # WIP
-This is a work in progress addon and I love to get some feedback on it, you can create an issue if you have a suggestion or if you find a bug
+This is a work in progress addon and I'd love to get some feedback on it, you can create an issue if you have a suggestion or if you find a bug. Thank you!
