@@ -1,10 +1,12 @@
 # Godot Gravity Fields
+### ***The code is in addons/gravityfields, any other code is for tests***
+
+### ***For easy installation the addon's zip is in the release section***
 
 ## What is it ?
 It's a system allowing you to easily have a mario galaxy gravity mechanic in your game.
 You can create different zones with their own gravity that will affect the player.
 
-### ***The code is in addons/gravityfields, any other code is for tests***
 
 ## What you can do
 Here is a list of demos :
