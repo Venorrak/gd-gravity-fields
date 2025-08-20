@@ -19,22 +19,22 @@ func _get_configuration_warnings() -> PackedStringArray:
 			warnings.append("Curve in Path3D should be a GCurve3D in order to work properly")
 	if validNode and (gravityProvider == null or gravityProvider is GravityDetector):
 		if gravityProvider.gravity_space_override == SPACE_OVERRIDE_DISABLED:
-			warnings.append("gravity_space_override should be enabled in any way")
+			warnings.append("gravity_space_override should be enabled in any way to see gravity configuration")
 		else:
 			if gravityProvider.gravity_point == true:
 				warnings.append("The gravity should be directionnal in the area (for point use a GravityPoint3D)")
 	return warnings
 
 func _get_property_list():
+	var ret = []
 	if Engine.is_editor_hint():
-		var ret = []
 		if gravityProvider == self or gravityProvider == null:
 			ret.append({
 				"name": &"gravityForce",
 				"type": TYPE_FLOAT,
 				"usage": PROPERTY_USAGE_DEFAULT
 			})
-		return ret
+	return ret
 
 func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
 	return rotate_by_provider(gravity_direction * gravityForce, global_transform)
@@ -66,11 +66,18 @@ func _init() -> void:
 	notify_property_list_changed()
 
 func _body_entered(body : Node3D) -> void:
-	if body is GravityBody3D:
-		body.gravityProvider = gravityProvider
+	if body is GravityBody3D && priority >= body._providerPriority:
+		body._gravityProvider = gravityProvider
+		body._providerPriority = priority
 		if gravityProvider == null:
-			body.gravityProvider = self
+			body._gravityProvider = self
 
 func _body_exited(body : Node3D) -> void:
-	if body is GravityBody3D and body.gravityProvider == gravityProvider:
-		body.gravityProvider = null
+	if body is GravityBody3D and body._gravityProvider == gravityProvider:
+		body._gravityProvider = null
+		body._providerPriority = -1
+		for a in get_overlapping_areas():
+			if a is GravityDetector:
+				for b in a.get_overlapping_bodies():
+					if b == body:
+						a._body_entered(body)

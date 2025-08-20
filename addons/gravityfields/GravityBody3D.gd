@@ -3,13 +3,14 @@ class_name GravityBody3D extends RigidBody3D
 
 @export var customGravityScale : float = 1
 
-var gravityProvider = null
+var _gravityProvider = null
+var _providerPriority : int = -1
 func _init() -> void:
 	gravity_scale = 0
 
 func get_custom_gravity() -> Vector3:
-	if gravityProvider:
-		return gravityProvider.get_custom_gravity(global_position) * customGravityScale
+	if _gravityProvider:
+		return _gravityProvider.get_custom_gravity(global_position) * customGravityScale
 	else:
 		return Vector3.ZERO
 
