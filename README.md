@@ -91,3 +91,4 @@ This is a work in progress addon and I'd love to get some feedback on it, you ca
         - cylinder code but tilt gravity towards center
     - odd shapes ?
         - check nearest surface
+- investigate player body & all other PhysicsBody
