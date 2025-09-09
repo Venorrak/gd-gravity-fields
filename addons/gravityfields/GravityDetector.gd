@@ -11,6 +11,8 @@ var gravityForce : float = 9.8
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray = []
 	var validNode : bool = true
+	if gravity_space_override == SPACE_OVERRIDE_DISABLED:
+		warnings.append("gravity_space_override should be enabled in any way to affect the gravity")
 	if not (gravityProvider is GravityPoint3D or gravityProvider is Path3D or gravityProvider == null or gravityProvider is GravityDetector):
 		validNode = false
 		warnings.append("Gravity Supplyer should be a GravityPoint3D, a Path3D or null(self)")
@@ -65,19 +67,15 @@ func _init() -> void:
 	update_configuration_warnings()
 	notify_property_list_changed()
 
+func _ready() -> void:
+	if gravityProvider == null:
+		gravityProvider = self
+
 func _body_entered(body : Node3D) -> void:
-	if body is GravityBody3D && priority >= body._providerPriority:
-		body._gravityProvider = gravityProvider
-		body._providerPriority = priority
-		if gravityProvider == null:
-			body._gravityProvider = self
+	if body is GravityBody3D:
+		body._gravityProviders.append({"provider": gravityProvider, "detector": self})
+		body._sort_providers()
 
 func _body_exited(body : Node3D) -> void:
-	if body is GravityBody3D and body._gravityProvider == gravityProvider:
-		body._gravityProvider = null
-		body._providerPriority = -1
-		for a in get_overlapping_areas():
-			if a is GravityDetector:
-				for b in a.get_overlapping_bodies():
-					if b == body:
-						a._body_entered(body)
+	if body is GravityBody3D:
+		body._gravityProviders.erase({"provider": gravityProvider, "detector": self})
