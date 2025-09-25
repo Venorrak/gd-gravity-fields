@@ -1,14 +1,17 @@
 @tool
-class_name GravityCurve3D extends Curve3D
+class_name ShapeProvider extends GravityProvider
 
-@export_group("Gravity")
-@export var gravityForce : float = 9.8
+@export var curve : Curve3D = Curve3D.new()
 @export var multipleFaces : bool = true:
 	set(value):
 		if value == multipleFaces : return
 		multipleFaces = value
+		update_gizmos()
 		notify_property_list_changed()
-var faces : int = 4
+var faces : int = 4:
+	set(value):
+		faces = value
+		update_gizmos()
 var peak : bool = false:
 	set(value):
 		if value == peak : return
@@ -16,9 +19,9 @@ var peak : bool = false:
 		notify_property_list_changed()
 var height: float = 0
 var radius: float = 0
-
-func _init() -> void:
-	up_vector_enabled = true
+	
+func _ready() -> void:
+	curve.changed.connect(update_gizmos)
 
 func _get_property_list():
 	if Engine.is_editor_hint():
@@ -49,14 +52,19 @@ func _get_property_list():
 				})
 		return ret
 
-func get_custom_gravity(local_body_position: Vector3, provider_transform: Transform3D) -> Vector3:
+func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
+	if not curve : return Vector3.ZERO
+	if curve.point_count < 2 : return Vector3.ZERO
+	
+	var local_body_position : Vector3 = globalBodyPosition - global_position
+	
 	var gravity: Vector3 = Vector3.DOWN * gravityForce
-	var rotated_body_position = _rotate_by_provider(local_body_position, provider_transform, true)
-	var closest_offset: float = get_closest_offset(rotated_body_position)
-	var closest_transform: Transform3D = sample_baked_with_rotation(closest_offset, false, true)
-	closest_transform = _rotate_by_provider(closest_transform, provider_transform, false)
+	var rotated_body_position = _rotate_by_provider(local_body_position, global_transform, true)
+	var closest_offset: float = curve.get_closest_offset(rotated_body_position)
+	var closest_transform: Transform3D = curve.sample_baked_with_rotation(closest_offset, false, true)
+	closest_transform = _rotate_by_provider(closest_transform, global_transform, false)
 	# Convert local_body_position to world position for gravity direction
-	var body_world_pos = provider_transform.origin + local_body_position
+	var body_world_pos = global_transform.origin + local_body_position
 	if multipleFaces:
 		var center: Vector3 = closest_transform.origin
 		var up: Vector3 = closest_transform.basis.y.normalized()
@@ -90,28 +98,9 @@ func get_custom_gravity(local_body_position: Vector3, provider_transform: Transf
 		gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
 		if peak:
 			var b : Basis = Basis()
+			# use vector.cross() here 
 			b = b.looking_at(forward.normalized(), gravity.normalized())
 			gravity = gravity.rotated(b.x.normalized(), -atan2(height, radius))
 	else:
 		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce
 	return gravity
-
-func _rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
-	var clean_basis : Basis = provider_transform.basis.orthonormalized()
-
-	if typeof(input) == TYPE_VECTOR3:
-		if inverse:
-			return clean_basis.inverse() * input
-		else:
-			return clean_basis * input
-
-	elif typeof(input) == TYPE_TRANSFORM3D:
-		var clean_provider : Transform3D = Transform3D(clean_basis, provider_transform.origin)
-		if inverse:
-			return clean_provider.affine_inverse() * input
-		else:
-			return clean_provider * input
-
-	else:
-		push_error("rotate_by_provider() only supports Vector3 or Transform3D")
-		return input

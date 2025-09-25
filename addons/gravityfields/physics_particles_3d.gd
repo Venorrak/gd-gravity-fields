@@ -30,15 +30,15 @@ func _process(delta: float) -> void:
 	DebugDraw3D.draw_points(points, DebugDraw3D.POINT_TYPE_SPHERE, 0.01, Color.PURPLE, delta)
 
 func _updatePoints(delta: float) -> void:
+	if not detector or not detector.gravityProvider : return
 	var provider = detector.gravityProvider
-	if provider:
-		for index in points.size():
-			if pointsLifetime[index] > 0:
-				points.set(index, points[index] + provider.get_custom_gravity(points[index]) * delta)
-				pointsLifetime.set(index, pointsLifetime[index] - delta)
-			else:
-				pointsLifetime.set(index, particleLifetime)
-				points.set(index, _randomParticlePosition())
+	for index in points.size():
+		if pointsLifetime[index] > 0:
+			points.set(index, points[index] + provider.get_custom_gravity(points[index]) * delta)
+			pointsLifetime.set(index, pointsLifetime[index] - delta)
+		else:
+			pointsLifetime.set(index, particleLifetime)
+			points.set(index, _randomParticlePosition())
 
 func _appendParticle() -> void:
 	points.append(_randomParticlePosition())

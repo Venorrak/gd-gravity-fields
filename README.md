@@ -87,3 +87,4 @@ This is a work in progress addon and I'd love to get some feedback on it, you ca
 - create new class apart for provider
     - make own curve gizmo
 - documentation
+- svg logo

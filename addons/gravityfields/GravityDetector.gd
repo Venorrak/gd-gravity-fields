@@ -1,45 +1,18 @@
 @tool
 class_name GravityDetector extends Area3D
 
-@export var gravityProvider : Node3D:
+@export var gravityProvider : GravityProvider:
 	set(value):
 		gravityProvider = value
 		update_configuration_warnings()
 		notify_property_list_changed()
-var gravityForce : float = 9.8
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray = []
 	var validNode : bool = true
 	if gravity_space_override == SPACE_OVERRIDE_DISABLED:
 		warnings.append("gravity_space_override should be enabled in any way to affect the gravity")
-	if not (gravityProvider is GravityPoint3D or gravityProvider is Path3D or gravityProvider == null or gravityProvider is GravityDetector):
-		validNode = false
-		warnings.append("Gravity Supplyer should be a GravityPoint3D, a Path3D or null(self)")
-	if validNode and gravityProvider is Path3D:
-		if not gravityProvider.curve is GravityCurve3D:
-			warnings.append("Curve in Path3D should be a GCurve3D in order to work properly")
-	if validNode and (gravityProvider == null or gravityProvider is GravityDetector):
-		if gravityProvider.gravity_space_override == SPACE_OVERRIDE_DISABLED:
-			warnings.append("gravity_space_override should be enabled in any way to see gravity configuration")
-		else:
-			if gravityProvider.gravity_point == true:
-				warnings.append("The gravity should be directionnal in the area (for point use a GravityPoint3D)")
 	return warnings
-
-func _get_property_list():
-	var ret = []
-	if Engine.is_editor_hint():
-		if gravityProvider == self or gravityProvider == null:
-			ret.append({
-				"name": &"gravityForce",
-				"type": TYPE_FLOAT,
-				"usage": PROPERTY_USAGE_DEFAULT
-			})
-	return ret
-
-func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
-	return _rotate_by_provider(gravity_direction * gravityForce, global_transform)
 
 func _rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
 	var clean_basis : Basis = provider_transform.basis.orthonormalized()
@@ -66,10 +39,6 @@ func _init() -> void:
 	body_exited.connect(_body_exited)
 	update_configuration_warnings()
 	notify_property_list_changed()
-
-func _ready() -> void:
-	if gravityProvider == null:
-		gravityProvider = self
 
 func _body_entered(body : Node3D) -> void:
 	if body is GravityBody3D:
