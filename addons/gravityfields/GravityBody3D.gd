@@ -5,8 +5,6 @@ class_name GravityBody3D extends RigidBody3D
 
 var _gravityProvider = null
 var _providerPriority : int = -1
-func _init() -> void:
-	gravity_scale = 0
 
 func get_custom_gravity() -> Vector3:
 	if _gravityProvider:

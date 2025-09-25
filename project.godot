@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="gravity-fields"
-run/main_scene="uid://cfjvarqrj7u7b"
+run/main_scene="uid://do7wo1cg7jrsb"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [debug]
 
 gdscript/warnings/native_method_override=1
+
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 

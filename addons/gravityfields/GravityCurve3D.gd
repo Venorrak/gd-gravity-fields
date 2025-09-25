@@ -1,14 +1,21 @@
 @tool
-class_name GCurve3D extends Curve3D
+class_name GravityCurve3D extends Curve3D
 
-@export_category("Gravity")
+@export_group("Gravity")
 @export var gravityForce : float = 9.8
 @export var multipleFaces : bool = true:
 	set(value):
 		if value == multipleFaces : return
 		multipleFaces = value
 		notify_property_list_changed()
-var faces : int = 2
+var faces : int = 4
+var peak : bool = false:
+	set(value):
+		if value == peak : return
+		peak = value
+		notify_property_list_changed()
+var height: float = 0
+var radius: float = 0
 
 func _init() -> void:
 	up_vector_enabled = true
@@ -24,6 +31,22 @@ func _get_property_list():
 				"hint_string": "2, 360",
 				"hint": PROPERTY_HINT_RANGE
 			})
+			ret.append({
+				"name": &"peak",
+				"type": TYPE_BOOL,
+				"usage": PROPERTY_USAGE_DEFAULT,
+			})
+			if peak:
+				ret.append({
+					"name": &"height",
+					"type": TYPE_FLOAT,
+					"usage": PROPERTY_USAGE_DEFAULT
+				})
+				ret.append({
+					"name": &"radius",
+					"type": TYPE_FLOAT,
+					"usage": PROPERTY_USAGE_DEFAULT
+				})
 		return ret
 
 func get_custom_gravity(local_body_position: Vector3, provider_transform: Transform3D) -> Vector3:
@@ -41,7 +64,7 @@ func get_custom_gravity(local_body_position: Vector3, provider_transform: Transf
 		var forward : Vector3 = closest_transform.basis.z.normalized()
 		var side : Vector3 = closest_transform.basis.x.normalized()
 		
-		var to_body: Vector3 = (local_body_position - center)
+		var to_body: Vector3 = (body_world_pos - center)
 		
 		# Project to_body vector onto the plane orthogonal to forward (remove the forward component)
 		var to_body_plane: Vector3 = to_body - forward * to_body.dot(forward)
@@ -62,11 +85,15 @@ func get_custom_gravity(local_body_position: Vector3, provider_transform: Transf
 			angle -= TAU
 
 		var index: int = int(floor(angle / step)) % faces
-		#print(index)
 		
 		var gravity_angle = -step * index
-		
-		gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
+		var dup : DVector3 = DVector3.new(up)
+		var dgrav = dup.rotated(Quaternion(forward, gravity_angle + PI)).scale(gravityForce)
+		if peak:
+			var b : Basis = Basis()
+			b = b.looking_at(forward.normalized(), dgrav.normalized())
+			dgrav.rotated(Quaternion(b.x.normalized(), -atan2(height, radius)))
+		gravity = dgrav.to_vector3_rounded()
 	else:
 		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce
 	return gravity

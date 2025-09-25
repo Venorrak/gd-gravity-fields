@@ -6,7 +6,7 @@ func _get_gizmo_name():
 	return "Custom Gravity indicators"
 
 func _has_gizmo(node):
-	if node is GPath3D or node is GravityPoint3D or node is GravityDetector:
+	if node is GravityPath3D or node is GravityPoint3D or node is GravityDetector:
 		return true
 	return false
 
@@ -19,8 +19,8 @@ func _redraw(gizmo : EditorNode3DGizmo):
 	var points = PackedVector3Array()
 	var node3d = gizmo.get_node_3d()
 	
-	if node3d is GPath3D and node3d.curve is GCurve3D:
-		var path : GPath3D = node3d as GPath3D
+	if node3d is GravityPath3D and node3d.curve is GravityCurve3D:
+		var path : GravityPath3D = node3d as GravityPath3D
 		points = getPathLines(path)
 	if node3d is GravityPoint3D:
 		var point : GravityPoint3D = node3d as GravityPoint3D
@@ -31,9 +31,9 @@ func _redraw(gizmo : EditorNode3DGizmo):
 
 	gizmo.add_lines(points, get_material("main", gizmo), false)
 
-func getPathLines(path : GPath3D) -> PackedVector3Array:
+func getPathLines(path : GravityPath3D) -> PackedVector3Array:
 	var points = PackedVector3Array()
-	var curve : GCurve3D = path.curve
+	var curve : GravityCurve3D = path.curve
 	for offset in curve.get_baked_length() + 1:
 		var transform : Transform3D = curve.sample_baked_with_rotation(offset, false, true)
 		var newShape : PackedVector3Array = []

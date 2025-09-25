@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const MyCustomGizmoPlugin = preload("res://addons/gravityfields/GCurve3DGizmo.gd")
+const MyCustomGizmoPlugin = preload("res://addons/gravityfields/GravityCurve3DGizmo.gd")
 var gizmo_plugin = MyCustomGizmoPlugin.new()
 
 

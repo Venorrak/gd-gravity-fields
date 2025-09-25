@@ -80,15 +80,8 @@ This is a work in progress addon and I'd love to get some feedback on it, you ca
 
 # TODO
 
-- better gizmo
-    - shader
-    - zone
-- additional gravity
-    - round corners
-    - multiples simultananeous providers
 - shapes
-    - piramid, cone, etc (depends only on number of faces)
-        - cylinder code but tilt gravity towards center
     - odd shapes ?
         - check nearest surface
 - investigate player body & all other PhysicsBody
+- documentation

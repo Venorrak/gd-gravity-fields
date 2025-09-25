@@ -15,7 +15,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 		validNode = false
 		warnings.append("Gravity Supplyer should be a GravityPoint3D, a Path3D or null(self)")
 	if validNode and gravityProvider is Path3D:
-		if not gravityProvider.curve is GCurve3D:
+		if not gravityProvider.curve is GravityCurve3D:
 			warnings.append("Curve in Path3D should be a GCurve3D in order to work properly")
 	if validNode and (gravityProvider == null or gravityProvider is GravityDetector):
 		if gravityProvider.gravity_space_override == SPACE_OVERRIDE_DISABLED:
