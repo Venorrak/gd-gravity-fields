@@ -51,10 +51,10 @@ func _get_property_list():
 
 func get_custom_gravity(local_body_position: Vector3, provider_transform: Transform3D) -> Vector3:
 	var gravity: Vector3 = Vector3.DOWN * gravityForce
-	var rotated_body_position = rotate_by_provider(local_body_position, provider_transform, true)
+	var rotated_body_position = _rotate_by_provider(local_body_position, provider_transform, true)
 	var closest_offset: float = get_closest_offset(rotated_body_position)
 	var closest_transform: Transform3D = sample_baked_with_rotation(closest_offset, false, true)
-	closest_transform = rotate_by_provider(closest_transform, provider_transform, false)
+	closest_transform = _rotate_by_provider(closest_transform, provider_transform, false)
 	# Convert local_body_position to world position for gravity direction
 	var body_world_pos = provider_transform.origin + local_body_position
 	if multipleFaces:
@@ -96,7 +96,7 @@ func get_custom_gravity(local_body_position: Vector3, provider_transform: Transf
 		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce
 	return gravity
 
-func rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
+func _rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
 	var clean_basis : Basis = provider_transform.basis.orthonormalized()
 
 	if typeof(input) == TYPE_VECTOR3:

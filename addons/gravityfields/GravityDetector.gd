@@ -39,9 +39,9 @@ func _get_property_list():
 	return ret
 
 func get_custom_gravity(bodyPosition : Vector3) -> Vector3:
-	return rotate_by_provider(gravity_direction * gravityForce, global_transform)
+	return _rotate_by_provider(gravity_direction * gravityForce, global_transform)
 
-func rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
+func _rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
 	var clean_basis : Basis = provider_transform.basis.orthonormalized()
 
 	if typeof(input) == TYPE_VECTOR3:
