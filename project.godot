@@ -13,7 +13,7 @@ config_version=5
 config/name="gravity-fields"
 run/main_scene="uid://do7wo1cg7jrsb"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dwqckqpsow0g1"
 
 [debug]
 

@@ -83,8 +83,3 @@ This is a work in progress addon and I'd love to get some feedback on it, you ca
 - shapes
     - odd shapes ?
         - check nearest surface
-- investigate player body & all other PhysicsBody
-- create new class apart for provider
-    - make own curve gizmo
-- documentation
-- svg logo

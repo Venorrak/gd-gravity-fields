@@ -1,6 +1,10 @@
 @tool
+@icon("res://addons/gravityfields/GravityDetector.svg")
 class_name GravityDetector extends Area3D
 
+## Area3D that passes the associated provider to all gravityBody that enters it.
+
+## The provider associated to this detector. Multiple detectors can have the same provider
 @export var gravityProvider : GravityProvider:
 	set(value):
 		gravityProvider = value

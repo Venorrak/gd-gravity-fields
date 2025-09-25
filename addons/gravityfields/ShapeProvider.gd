@@ -1,23 +1,31 @@
 @tool
+@icon("res://addons/gravityfields/ShapeProvider.svg")
 class_name ShapeProvider extends GravityProvider
+## Gravity provider for exotic shapes !
 
+## Gravity will be calculated from the curve points
 @export var curve : Curve3D = Curve3D.new()
+## Enable if you don't want pill shaped gravity
 @export var multipleFaces : bool = true:
 	set(value):
 		if value == multipleFaces : return
 		multipleFaces = value
 		update_gizmos()
 		notify_property_list_changed()
+## Number of "faces" of the gravity.
 var faces : int = 4:
 	set(value):
 		faces = value
 		update_gizmos()
+## Enable to have cone/pyramid shaped gravity. The tip is the end of the curve. Suggest me a better name for this honestly
 var peak : bool = false:
 	set(value):
 		if value == peak : return
 		peak = value
 		notify_property_list_changed()
+## Height of the pyramid/cone. If set to any value and radius to 0, the gravity will flow along the curve
 var height: float = 0
+## Radius of the pyramid/cone
 var radius: float = 0
 	
 func _ready() -> void:
@@ -52,6 +60,7 @@ func _get_property_list():
 				})
 		return ret
 
+## Get the custom gravity vector
 func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
 	if not curve : return Vector3.ZERO
 	if curve.point_count < 2 : return Vector3.ZERO

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="16"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="GravityBody3D.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="50.4375"
+     inkscape:cx="8"
+     inkscape:cy="6.4138786"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1432"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <ellipse
+     style="fill:#7e00ff;stroke:#fcfcfc;stroke-width:0.2;fill-opacity:1"
+     id="path2"
+     cx="8"
+     cy="7.9900866"
+     rx="7.0086741"
+     ry="7.0185876" />
+  <path
+     fill="#fc7f7f"
+     d="M8 1a7 7 0 0 0 0 14A7 7 0 0 0 8 1zm1.951 1.334A6 6 0 0 1 14.001 8h-7a2 2 0 0 0-.95-1.7c1.346-2.029 2.604-3.263 3.9-3.967zm-6.828 2.18c.146.65.358 1.283.684 1.884A2 2 0 0 0 3 8H2a6 6 0 0 1 1.123-3.486zM3.8 9.6a2 2 0 0 0 2.4 0c1.472 2.027 2.728 3.264 3.8 4a6 6 0 0 1-7.15-2.5c.25-.6.5-1 .95-1.5z"
+     id="path1" />
+  <path
+     id="rect16"
+     style="fill:#8000ff;fill-opacity:1;stroke:#fc7e7e;stroke-width:0"
+     d="M 3.795058,6.9194548 H 6.0508058 L 4.9201347,8.761234 Z"
+     sodipodi:nodetypes="cccc" />
+  <rect
+     style="fill:#8000ff;fill-opacity:1;stroke:#fc7e7e;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+     id="rect17"
+     width="2.2602236"
+     height="0.40174788"
+     x="3.7905824"
+     y="8.8968897" />
+</svg>
