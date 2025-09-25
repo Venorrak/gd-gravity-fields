@@ -242,7 +242,6 @@ priority = 9
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath(".")
-gravityForce = 9.8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform2/GravityDetector"]
 shape = SubResource("BoxShape3D_ndvhq")
@@ -347,8 +346,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath(".")
-gravityForce = -9.8
-metadata/_custom_type_script = "uid://doj8d8l77i5kj"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityDetector"]
 shape = SubResource("BoxShape3D_k6pns")
