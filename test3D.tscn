@@ -242,6 +242,7 @@ priority = 9
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath(".")
+gravityForce = 9.8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform2/GravityDetector"]
 shape = SubResource("BoxShape3D_ndvhq")
@@ -315,6 +316,7 @@ visible = false
 mesh = SubResource("CylinderMesh_ryfo5")
 
 [node name="GravityDetector" type="Area3D" parent="cone" node_paths=PackedStringArray("gravityProvider")]
+gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../../Path3D")
 metadata/_custom_type_script = "uid://doj8d8l77i5kj"
@@ -323,7 +325,7 @@ metadata/_custom_type_script = "uid://doj8d8l77i5kj"
 shape = SubResource("BoxShape3D_ykclu")
 
 [node name="GravityBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("arrow")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99391, 1.39616, 1.95991)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01394, 1.32515, 3.73164)
 gravity_scale = 0.0
 script = ExtResource("5_y26re")
 arrow = NodePath("ShapeCast3D")
@@ -346,6 +348,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath(".")
+gravityForce = 9.8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityDetector"]
 shape = SubResource("BoxShape3D_k6pns")

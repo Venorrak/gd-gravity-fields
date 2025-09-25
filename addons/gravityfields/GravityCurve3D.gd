@@ -87,17 +87,14 @@ func get_custom_gravity(local_body_position: Vector3, provider_transform: Transf
 		var index: int = int(floor(angle / step)) % faces
 		
 		var gravity_angle = -step * index
-		var dup : DVector3 = DVector3.new(up)
-		var dgrav = dup.rotated(Quaternion(forward, gravity_angle + PI)).scale(gravityForce)
+		gravity = up.rotated(forward, gravity_angle + PI) * gravityForce
 		if peak:
 			var b : Basis = Basis()
-			b = b.looking_at(forward.normalized(), dgrav.normalized())
-			dgrav.rotated(Quaternion(b.x.normalized(), -atan2(height, radius)))
-		gravity = dgrav.to_vector3_rounded()
+			b = b.looking_at(forward.normalized(), gravity.normalized())
+			gravity = gravity.rotated(b.x.normalized(), -atan2(height, radius))
 	else:
 		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce
 	return gravity
-
 
 func rotate_by_provider(input, provider_transform: Transform3D, inverse := false):
 	var clean_basis : Basis = provider_transform.basis.orthonormalized()

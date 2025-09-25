@@ -28,14 +28,18 @@ _data = {
 point_count = 4
 script = ExtResource("4_2w5ey")
 gravityForce = 9.8
-multipleFaces = false
+multipleFaces = true
+faces = 20
+peak = true
+height = 5.0
+radius = 0.0
 metadata/_custom_type_script = "uid://b1653isr6dqyh"
 
 [node name="PhysicsParticles3D" type="Node3D" node_paths=PackedStringArray("detector")]
 script = ExtResource("1_ebgqo")
 detector = NodePath("GravityDetector")
 enabled = true
-nbOfParticles = 20
+nbOfParticles = 50
 particleLifetime = 2.0
 paritcleSpawnerSize = Vector3(20, 20, 20)
 
@@ -53,8 +57,7 @@ metadata/_custom_type_script = "uid://cpko5ytng8ccr"
 [node name="GravityDetector" type="Area3D" parent="." node_paths=PackedStringArray("gravityProvider")]
 gravity_space_override = 3
 script = ExtResource("3_iwlkg")
-gravityProvider = NodePath(".")
-gravityForce = 9.8
+gravityProvider = NodePath("GPath3D")
 metadata/_custom_type_script = "uid://doj8d8l77i5kj"
 
 [node name="GPath3D" type="Path3D" parent="GravityDetector"]
