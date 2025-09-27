@@ -1,12 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://do7wo1cg7jrsb"]
+[gd_scene load_steps=38 format=3 uid="uid://do7wo1cg7jrsb"]
 
-[ext_resource type="Script" uid="uid://doj8d8l77i5kj" path="res://addons/gravityfields/GravityDetector.gd" id="2_ou1c5"]
-[ext_resource type="Script" uid="uid://bn0etmpet1amx" path="res://addons/gravityfields/ShapeProvider.gd" id="5_6mpf0"]
-[ext_resource type="Script" uid="uid://mldoeu8nrd1m" path="res://player3d.gd" id="5_y26re"]
-[ext_resource type="Script" uid="uid://x7jminosn7ba" path="res://addons/gravityfields/SphereProvider.gd" id="6_ryfo5"]
-[ext_resource type="Script" uid="uid://cpko5ytng8ccr" path="res://cam.gd" id="6_y26re"]
-[ext_resource type="Script" uid="uid://be08ak5pomog4" path="res://meshCollision.gd" id="7_6mpf0"]
-[ext_resource type="Script" uid="uid://hkouu5kcc1un" path="res://addons/gravityfields/DirectionProvider.gd" id="7_nlr5m"]
+[ext_resource type="Script" uid="uid://d2eriunqxr78j" path="res://addons/gravityfields/GravityDetector.gd" id="2_ou1c5"]
+[ext_resource type="Script" uid="uid://cibbha5ej7a67" path="res://addons/gravityfields/ShapeProvider.gd" id="5_6mpf0"]
+[ext_resource type="Script" uid="uid://b3adog1c71vo" path="res://player3d.gd" id="5_y26re"]
+[ext_resource type="Script" uid="uid://bbqrl2jnl4ewi" path="res://addons/gravityfields/SphereProvider.gd" id="6_ryfo5"]
+[ext_resource type="Script" uid="uid://biw1fa1t82jgw" path="res://cam.gd" id="6_y26re"]
+[ext_resource type="Script" uid="uid://bvyeai5udjug2" path="res://addons/gravityfields/DirectionProvider.gd" id="7_nlr5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bfqwq"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -20,13 +19,6 @@ background_mode = 2
 sky = SubResource("Sky_wuppg")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="TorusMesh" id="TorusMesh_ryfo5"]
-inner_radius = 2.5
-outer_radius = 5.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_nlr5m"]
-size = Vector3(19.23, 7.445, 19.92)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wuppg"]
 radius = 5.0
@@ -140,18 +132,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xe411")
-
-[node name="taurusm" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2803, 0, -83.6954)
-mesh = SubResource("TorusMesh_ryfo5")
-skeleton = NodePath("")
-script = ExtResource("7_6mpf0")
-
-[node name="GravityDetector" type="Area3D" parent="taurusm"]
-script = ExtResource("2_ou1c5")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="taurusm/GravityDetector"]
-shape = SubResource("BoxShape3D_nlr5m")
 
 [node name="pill_cylindre" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 0.707107, -3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 72.8174, -1.90735e-06, -12.024)
@@ -300,7 +280,6 @@ mesh = SubResource("CylinderMesh_ryfo5")
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../../ShapeProvider")
-metadata/_custom_type_script = "uid://doj8d8l77i5kj"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cone/GravityDetector"]
 shape = SubResource("BoxShape3D_ykclu")
@@ -334,7 +313,6 @@ shape = SubResource("BoxShape3D_k6pns")
 
 [node name="SphereProvider" type="Node3D" parent="."]
 script = ExtResource("6_ryfo5")
-metadata/_custom_type_script = "uid://x7jminosn7ba"
 
 [node name="ShapeProvider" type="Node3D" parent="."]
 transform = Transform3D(-0.7818097, 0.05133018, 0.6214003, 0.2909029, 0.91151935, 0.29070196, -0.55149704, 0.40804124, -0.7275669, 0, 0, 0)
@@ -344,11 +322,9 @@ faces = 4
 peak = true
 height = 5.0
 radius = 5.0
-metadata/_custom_type_script = "uid://bn0etmpet1amx"
 
 [node name="DirectionProvider" type="Node3D" parent="."]
 script = ExtResource("7_nlr5m")
-metadata/_custom_type_script = "uid://hkouu5kcc1un"
 
 [node name="ShapeProvider2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.981367, 0, -1.3929925)
@@ -356,4 +332,3 @@ script = ExtResource("5_6mpf0")
 curve = SubResource("Curve3D_6mpf0")
 faces = 4
 peak = false
-metadata/_custom_type_script = "uid://bn0etmpet1amx"
