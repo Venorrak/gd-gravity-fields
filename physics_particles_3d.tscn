@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b27ndjl28sy4"]
+[gd_scene load_steps=13 format=3 uid="uid://b27ndjl28sy4"]
 
 [ext_resource type="Script" uid="uid://csjagafypixhb" path="res://addons/gravityfields/PhysicsParticles3d.gd" id="1_ebgqo"]
 [ext_resource type="Script" uid="uid://biw1fa1t82jgw" path="res://cam.gd" id="2_8ohtj"]
@@ -20,6 +20,11 @@ sky = SubResource("Sky_mny7r")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Curve" id="Curve_5183w"]
+_limits = [0.0, 1.0, 0.0, 20.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(7.282609, 0), 0.0, 0.0, 0, 0, Vector2(20, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Curve3D" id="Curve3D_6h0yd"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, -5, 0, 0, 0, 0, 0, 7, 10, 0),
@@ -27,12 +32,17 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="Curve" id="Curve_dopvw"]
+_limits = [0.0, 1.0, 0.0, 20.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.97752815), 0.0, 0.0, 0, 0, Vector2(4.456522, 0.13483155), 0.0, 0.0, 0, 0, Vector2(20, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="PhysicsParticles3D" type="Node3D" node_paths=PackedStringArray("provider")]
 script = ExtResource("1_ebgqo")
 provider = NodePath("GravityDetector/ShapeProvider")
 size = 0.1
 enabled = true
-nbOfParticles = 100
+nbOfParticles = 200
 particleLifetime = 1.0
 paritcleSpawnerSize = Vector3(20, 20, 20)
 
@@ -58,9 +68,10 @@ visible = false
 script = ExtResource("4_iwlkg")
 
 [node name="SphereProvider" type="Node3D" parent="GravityDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.91003, 13.360162, 9.925591)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.68133, 13.360162, 14.368064)
 visible = false
 script = ExtResource("5_2w5ey")
+gravityFalloff = SubResource("Curve_5183w")
 
 [node name="ShapeProvider" type="Node3D" parent="GravityDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36608, 4.5561647, 9.690553)
@@ -69,4 +80,5 @@ curve = SubResource("Curve3D_6h0yd")
 faces = 4
 peak = true
 height = 5.0
-radius = 5.0
+radius = 0.0
+gravityFalloff = SubResource("Curve_dopvw")

@@ -110,6 +110,7 @@ func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
 			# use vector.cross() here 
 			b = b.looking_at(forward.normalized(), gravity.normalized())
 			gravity = gravity.rotated(b.x.normalized(), -atan2(height, radius))
+		gravity *= _get_falloff(to_body.length())
 	else:
-		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce
+		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce * _get_falloff((closest_transform.origin - body_world_pos).length())
 	return gravity

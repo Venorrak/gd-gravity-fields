@@ -11,4 +11,6 @@ class_name DirectionProvider extends GravityProvider
 
 ## Get the custom gravity vector
 func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
-	return _rotate_by_provider(gravity_direction.normalized() * gravityForce, global_transform)
+	var direction : Vector3 = gravity_direction.normalized()
+	var distance : float = (globalBodyPosition - global_position).dot(direction)
+	return _rotate_by_provider(direction * gravityForce, global_transform) * _get_falloff(distance)

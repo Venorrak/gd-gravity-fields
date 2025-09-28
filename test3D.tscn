@@ -267,6 +267,7 @@ shape = SubResource("SphereShape3D_ryfo5")
 
 [node name="cone" type="StaticBody3D" parent="."]
 transform = Transform3D(-0.78180987, 0.051329967, 0.6214008, 0.290903, 0.9115198, 0.29070222, -0.55149716, 0.40804133, -0.72756684, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cone"]
 shape = SubResource("ConvexPolygonShape3D_6mpf0")
@@ -286,6 +287,7 @@ shape = SubResource("BoxShape3D_ykclu")
 
 [node name="GravityBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("arrow")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01394, 2.4314198, 3.6600792)
+visible = false
 gravity_scale = 0.0
 script = ExtResource("5_y26re")
 arrow = NodePath("ShapeCast3D")
@@ -312,10 +314,12 @@ script = ExtResource("2_ou1c5")
 shape = SubResource("BoxShape3D_k6pns")
 
 [node name="SphereProvider" type="Node3D" parent="."]
+visible = false
 script = ExtResource("6_ryfo5")
 
 [node name="ShapeProvider" type="Node3D" parent="."]
 transform = Transform3D(-0.7818097, 0.05133018, 0.6214003, 0.2909029, 0.91151935, 0.29070196, -0.55149704, 0.40804124, -0.7275669, 0, 0, 0)
+visible = false
 script = ExtResource("5_6mpf0")
 curve = SubResource("Curve3D_ndvhq")
 faces = 4
@@ -325,9 +329,11 @@ radius = 5.0
 
 [node name="DirectionProvider" type="Node3D" parent="."]
 script = ExtResource("7_nlr5m")
+gravity_direction = Vector3(2.21, -2.195, -6.765)
 
 [node name="ShapeProvider2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.981367, 0, -1.3929925)
+visible = false
 script = ExtResource("5_6mpf0")
 curve = SubResource("Curve3D_6mpf0")
 faces = 4
