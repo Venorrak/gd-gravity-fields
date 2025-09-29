@@ -3,6 +3,8 @@
 
 ### ***For easy installation the addon's zip is in the release section***
 
+### ***⚠️ Only works on 4.5 for now***
+
 ## What is it ?
 It's an addon allowing you to easily implement custom gravity into your game.
 You can create different zones with their own gravity that will affect the player.
