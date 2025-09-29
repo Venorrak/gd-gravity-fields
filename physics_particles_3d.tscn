@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://b27ndjl28sy4"]
+
+[ext_resource type="Script" uid="uid://dl7uh0nr80sae" path="res://addons/gravityfields/PhysicsParticles3d.gd" id="1_ebgqo"]
+[ext_resource type="Script" uid="uid://cpko5ytng8ccr" path="res://cam.gd" id="2_8ohtj"]
+[ext_resource type="Script" uid="uid://doj8d8l77i5kj" path="res://addons/gravityfields/GravityDetector.gd" id="3_iwlkg"]
+[ext_resource type="Script" uid="uid://hkouu5kcc1un" path="res://addons/gravityfields/DirectionProvider.gd" id="4_iwlkg"]
+[ext_resource type="Script" uid="uid://x7jminosn7ba" path="res://addons/gravityfields/SphereProvider.gd" id="5_2w5ey"]
+[ext_resource type="Script" uid="uid://bn0etmpet1amx" path="res://addons/gravityfields/ShapeProvider.gd" id="6_1xfjs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ohtj"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_mny7r"]
+sky_material = SubResource("ProceduralSkyMaterial_8ohtj")
+
+[sub_resource type="Environment" id="Environment_iwlkg"]
+background_mode = 2
+sky = SubResource("Sky_mny7r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Curve" id="Curve_5183w"]
+_limits = [0.0, 1.0, 0.0, 20.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(8.246952, 0.15528369), 0.0, 0.0, 0, 0, Vector2(20, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_6h0yd"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, -5, 0, 0, 0, 0, 0, 7, 10, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="PhysicsParticles3D" type="Node3D" node_paths=PackedStringArray("provider")]
+script = ExtResource("1_ebgqo")
+provider = NodePath("GravityDetector/SphereProvider")
+size = 0.1
+enabled = true
+nbOfParticles = 200
+particleLifetime = 1.0
+paritcleSpawnerSize = Vector3(20, 20, 20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iwlkg")
+
+[node name="FreeLookCamera" type="Camera3D" parent="."]
+script = ExtResource("2_8ohtj")
+
+[node name="GravityDetector" type="Area3D" parent="." node_paths=PackedStringArray("gravityProvider")]
+gravity_space_override = 3
+gravity_point_center = Vector3(0, -1.045, 0)
+gravity_direction = Vector3(0, -1.045, 0)
+script = ExtResource("3_iwlkg")
+gravityProvider = NodePath("DirectionProvider")
+
+[node name="DirectionProvider" type="Node3D" parent="GravityDetector"]
+visible = false
+script = ExtResource("4_iwlkg")
+
+[node name="SphereProvider" type="Node3D" parent="GravityDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.68133, 13.360162, 14.368064)
+script = ExtResource("5_2w5ey")
+gravityFalloff = SubResource("Curve_5183w")
+
+[node name="ShapeProvider" type="Node3D" parent="GravityDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36608, 4.5561647, 9.690553)
+visible = false
+script = ExtResource("6_1xfjs")
+curve = SubResource("Curve3D_6h0yd")
+multipleFaces = false

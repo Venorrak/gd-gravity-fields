@@ -4,76 +4,93 @@
 ### ***For easy installation the addon's zip is in the release section***
 
 ## What is it ?
-It's a system allowing you to easily have a mario galaxy gravity mechanic in your game.
+It's an addon allowing you to easily implement custom gravity into your game.
 You can create different zones with their own gravity that will affect the player.
+
+The goal is to be able to make gravity zones just like in Mario Galaxy
 
 
 ## What you can do
 Here is a list of demos :
 
-Parallel Gravity
+Directional Gravity
 
-![](media/Screen%20Recording%202025-08-15%20234537.gif)
+![](media/directional.gif)
 
 Sphere Gravity
 
-![](media/Screen%20Recording%202025-08-15%20234741.gif)
-
-Taurus Gravity
-
-![](media/Screen%20Recording%202025-08-15%20234916.gif)
+![](media/Sphere.gif)
 
 Pill shaped gravity
 
-![](media/Screen%20Recording%202025-08-15%20235157.gif)
+![](media/pill.gif)
+
+Pyramid shaped gravity
+
+![](media/pyramid.gif)
+
+Gravity current
+
+![](media/current.gif)
 
 Other shapes
 
-![](media/Screen%20Recording%202025-08-15%20235527.gif)
+![](media/other.gif)
 
 
 ## How does it work
 Before going into it, here's words and definitions:
-- Provider -> Node that applies gravity to the body
+- Provider -> Node that returns the gravity applied to the body
 - Detector -> Area3D detecting body entering and asigning a Provider to it
-- Body -> a RigidBody
+- GravityBody -> a RigidBody
 
 ### GravityBody3D
-![Gravity Body](media/Screenshot%202025-08-15%20235819.png)
+![](media/gravitybody.png)
 
-The GravityBody3D is a RigidBody3D that can be influenced by our custom gravity. If you don't set the base gravity scale to zero, the body will be influenced by both the custom and the project's gravity. Call `get_custom_gravity` instead of `get_gravity` to get the gravity Vector.
-
-### GPath3D & GCurve3D
-![GCurve3D](media/Screenshot%202025-08-15%20235616.png)
-
-The GPath3D and the GCurve3D work together as a provider. The gravity applied to the body will be calculated with the position of the body relative to the nearest point on the path. You can set the force of the gravity and chose the number of "faces" your path will have. For example, no faces the "shape" of the gravity will be like a pill. If you have "faces", the "shape" of the gravity will look like [this](#gpath3d).
-
-### GravityPoint3D
-![Gravity Point](media/Screenshot%202025-08-15%20235627.png)
-
-The GravityPoint3D is simply used as a provider for a planet like gravity.
+The GravityBody3D is a RigidBody3D that can be influenced by our custom gravity. If you don't set the base gravity scale to zero, the body will be influenced by both the custom and the project's gravity. Call `get_custom_gravity` instead of `get_gravity` to get the applied gravity.
 
 ### GravityDetector3D
-![Gravity Detector line](media/Screenshot%202025-08-15%20235745.png)
+![](media/gravitydetector.png)
 
-The GravityDetector3D is an Area3D that will asign its gravity provider to an entering GravityBody3D.
+The GravityDetector3D is an Area3D that will asign its gravity provider to an entering GravityBody3D. Enabling the space override in the gravity section is necessary to apply the gravity.
 
-![Gravity Detector own](media/Screenshot%202025-08-16%20004124.png)
+### GravityProvider (abstract)
+![](media/gravityprovider.png)
+![](media/falloff.gif)
 
-For parallel gravity, you can assign the GravityDetector's provider to itself of leave it to null. When doing that you need to enable space override and then your gravity will go in the direction you set at the strenght you set.
+You can set gravity falloff with a curve. You can make so the closer you are from an object the stronger its gravity will be. Play with the values, the possibilities are endless!
+
+You can set the force of the gravity, call the `get_custom_gravity` to get the Vector of the gravity.
+
+#### DirectionProvider
+![](media/directionprovider.png)
+
+This is used for flat surfaces. the same gravity will be applied everywhere, you just set the direction of it.
+
+#### SphereProvider
+
+The gravity applied will be like one of a planet.
+
+#### ShapeProvider
+![](media/shapeprovider.png)
+
+The gravity applied to the body will be calculated with the position of the body relative to the nearest point on the curve. You can set the force of the gravity and chose the number of "faces" your path will have. For example, with no faces, the "shape" of the gravity will be like a pill. If you have "faces", the "shape" of the gravity could look like [this](#gpath3d). The "Peak" option allows you to make pyramids & cones, the tilt of the gravity depends on the height and radius values. A height and a radius of 5 will make a 45 degrees angle. For the "gravity curren" you just need to set the height to any number and the radius to 0.
 
 ## Custom Gizmo
 You will also have a custom gizmo for each GravityProvider
 
-### GPath3D
-no faces (Taurus)
-![gizmo circle](media/Screenshot%202025-08-15%20233412.png)
+### ShapeProviderGizmo
+![](media/shapeGizmo.png)
 
-3 faces
-![gizmo line triangle](media/Screenshot%202025-08-15%20235235.png)
+### SphereProviderGizmo
+![](media/sphereGizmo.png)
 
-### GravityPoint3D
-![gizmo point](media/Screenshot%202025-08-15%20233510.png)
+### DirectionProviderGizmo
+![](media/directionGizmo.png)
 
-# WIP
-This is a work in progress addon and I'd love to get some feedback on it, you can create an issue if you have a suggestion or if you find a bug. Thank you!
+## Custom Physics Particles
+![](media/particles.gif)
+
+Normal Particles in godot can't be affected by in-game gravity so I made my own particles. This option is very limited but is very usefull in the editor for figuring out how the gravity is behaving.
+
+### ⚠️ To use this node, you will need to install the [debug draw 3d](https://github.com/DmitriySalnikov/godot_debug_draw_3d) addon. It is used to display the particles on screen

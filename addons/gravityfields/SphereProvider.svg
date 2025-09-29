@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="16"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="SphereProvider.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect8"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,1.1375163,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,1.2427716,0,1 @ F,0,0,1,0,4.7072854,0,1"
+       radius="0"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="50.4375"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1432"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <ellipse
+     style="fill:#fc7d7d"
+     id="path1"
+     cx="8.0198269"
+     cy="7.881041"
+     rx="6.3742256"
+     ry="6.4337049"
+     inkscape:transform-center-x="-0.09913259"
+     inkscape:transform-center-y="-0.039653036" />
+  <path
+     id="path7"
+     style="fill:#8000ff;fill-opacity:1;stroke-width:5.15614"
+     d="M 3.7972573,10.63064 C 2.5643986,8.6842652 2.7461147,6.0585373 4.3716667,4.307253 5.9704944,2.5847597 8.4614248,2.2518781 10.403583,3.3525199 c 0.595608,0.3375373 0.481602,0.957473 -0.150484,1.2249828 A 10.327132,10.327132 132.16204 0 0 4.9403759,10.444426 l -0.00691,0.01709 c -0.2352979,0.582505 -0.8007378,0.698752 -1.1362134,0.16912 z"
+     sodipodi:nodetypes="csccc"
+     inkscape:path-effect="#path-effect8"
+     inkscape:original-d="M 4.5074262,11.516238 C 2.5434095,9.557679 2.4828549,6.3421596 4.3716667,4.307253 6.2604783,2.2723462 9.3943456,2.1768396 11.397593,4.0931333 L 6.703439,6.0797785 Z" />
+</svg>
