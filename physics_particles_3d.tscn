@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b27ndjl28sy4"]
+[gd_scene load_steps=12 format=3 uid="uid://b27ndjl28sy4"]
 
-[ext_resource type="Script" uid="uid://csjagafypixhb" path="res://addons/gravityfields/PhysicsParticles3d.gd" id="1_ebgqo"]
-[ext_resource type="Script" uid="uid://biw1fa1t82jgw" path="res://cam.gd" id="2_8ohtj"]
-[ext_resource type="Script" uid="uid://d2eriunqxr78j" path="res://addons/gravityfields/GravityDetector.gd" id="3_iwlkg"]
-[ext_resource type="Script" uid="uid://bvyeai5udjug2" path="res://addons/gravityfields/DirectionProvider.gd" id="4_iwlkg"]
-[ext_resource type="Script" uid="uid://bbqrl2jnl4ewi" path="res://addons/gravityfields/SphereProvider.gd" id="5_2w5ey"]
-[ext_resource type="Script" uid="uid://cibbha5ej7a67" path="res://addons/gravityfields/ShapeProvider.gd" id="6_1xfjs"]
+[ext_resource type="Script" uid="uid://dl7uh0nr80sae" path="res://addons/gravityfields/PhysicsParticles3d.gd" id="1_ebgqo"]
+[ext_resource type="Script" uid="uid://cpko5ytng8ccr" path="res://cam.gd" id="2_8ohtj"]
+[ext_resource type="Script" uid="uid://doj8d8l77i5kj" path="res://addons/gravityfields/GravityDetector.gd" id="3_iwlkg"]
+[ext_resource type="Script" uid="uid://hkouu5kcc1un" path="res://addons/gravityfields/DirectionProvider.gd" id="4_iwlkg"]
+[ext_resource type="Script" uid="uid://x7jminosn7ba" path="res://addons/gravityfields/SphereProvider.gd" id="5_2w5ey"]
+[ext_resource type="Script" uid="uid://bn0etmpet1amx" path="res://addons/gravityfields/ShapeProvider.gd" id="6_1xfjs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ohtj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -22,7 +22,7 @@ glow_enabled = true
 
 [sub_resource type="Curve" id="Curve_5183w"]
 _limits = [0.0, 1.0, 0.0, 20.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(7.282609, 0), 0.0, 0.0, 0, 0, Vector2(20, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(8.246952, 0.15528369), 0.0, 0.0, 0, 0, Vector2(20, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve3D" id="Curve3D_6h0yd"]
@@ -32,14 +32,9 @@ _data = {
 }
 point_count = 3
 
-[sub_resource type="Curve" id="Curve_dopvw"]
-_limits = [0.0, 1.0, 0.0, 20.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.97752815), 0.0, 0.0, 0, 0, Vector2(4.456522, 0.13483155), 0.0, 0.0, 0, 0, Vector2(20, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [node name="PhysicsParticles3D" type="Node3D" node_paths=PackedStringArray("provider")]
 script = ExtResource("1_ebgqo")
-provider = NodePath("GravityDetector/ShapeProvider")
+provider = NodePath("GravityDetector/SphereProvider")
 size = 0.1
 enabled = true
 nbOfParticles = 200
@@ -69,16 +64,12 @@ script = ExtResource("4_iwlkg")
 
 [node name="SphereProvider" type="Node3D" parent="GravityDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.68133, 13.360162, 14.368064)
-visible = false
 script = ExtResource("5_2w5ey")
 gravityFalloff = SubResource("Curve_5183w")
 
 [node name="ShapeProvider" type="Node3D" parent="GravityDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36608, 4.5561647, 9.690553)
+visible = false
 script = ExtResource("6_1xfjs")
 curve = SubResource("Curve3D_6h0yd")
-faces = 4
-peak = true
-height = 5.0
-radius = 0.0
-gravityFalloff = SubResource("Curve_dopvw")
+multipleFaces = false

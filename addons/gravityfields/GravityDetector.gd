@@ -14,6 +14,8 @@ class_name GravityDetector extends Area3D
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray = []
 	var validNode : bool = true
+	if not gravityProvider:
+		warnings.append("No gravity provider bound")
 	if gravity_space_override == SPACE_OVERRIDE_DISABLED:
 		warnings.append("gravity_space_override should be enabled in any way to affect the gravity")
 	return warnings
@@ -45,7 +47,7 @@ func _init() -> void:
 	notify_property_list_changed()
 
 func _body_entered(body : Node3D) -> void:
-	if body is GravityBody3D:
+	if body is GravityBody3D and gravityProvider:
 		body._gravityProviders.append({"provider": gravityProvider, "detector": self})
 		body._sort_providers()
 
