@@ -95,4 +95,4 @@ You will also have a custom gizmo for each GravityProvider
 
 Normal Particles in godot can't be affected by in-game gravity so I made my own particles. This option is very limited but is very usefull in the editor for figuring out how the gravity is behaving.
 
-### ⚠️ To use this node, you will need to install the [debug draw 3d](https://github.com/DmitriySalnikov/godot_debug_draw_3d) addon. It is used to display the particles on screen
+### ⚠️ To use this node, you will need to install the [debug draw 3d](https://github.com/DmitriySalnikov/godot_debug_draw_3d) addon (tested with 1.5.1). It is used to display the particles on screen
