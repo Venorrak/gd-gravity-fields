@@ -47,10 +47,10 @@ func _init() -> void:
 	notify_property_list_changed()
 
 func _body_entered(body : Node3D) -> void:
-	if body is GravityBody3D and gravityProvider:
-		body._gravityProviders.append({"provider": gravityProvider, "detector": self})
-		body._sort_providers()
+	if (body is GravityBody3D or body is GravityCharacter3D) and gravityProvider:
+		body._gravityDetectors.append(self)
+		body._sort_detectors()
 
 func _body_exited(body : Node3D) -> void:
-	if body is GravityBody3D:
-		body._gravityProviders.erase({"provider": gravityProvider, "detector": self})
+	if body is GravityBody3D or body is GravityCharacter3D:
+		body._gravityDetectors.erase(self)

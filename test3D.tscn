@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://do7wo1cg7jrsb"]
+[gd_scene load_steps=40 format=3 uid="uid://do7wo1cg7jrsb"]
 
 [ext_resource type="Script" uid="uid://doj8d8l77i5kj" path="res://addons/gravityfields/GravityDetector.gd" id="2_ou1c5"]
+[ext_resource type="Script" uid="uid://b6vx2r3r1mu0u" path="res://addons/gravityfields/GravityCharacter3D.gd" id="3_6mpf0"]
 [ext_resource type="Script" uid="uid://bn0etmpet1amx" path="res://addons/gravityfields/ShapeProvider.gd" id="5_6mpf0"]
 [ext_resource type="Script" uid="uid://mldoeu8nrd1m" path="res://player3d.gd" id="5_y26re"]
 [ext_resource type="Script" uid="uid://x7jminosn7ba" path="res://addons/gravityfields/SphereProvider.gd" id="6_ryfo5"]
@@ -106,6 +107,10 @@ size = Vector3(30, 30, 30)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6mpf0"]
 radius = 0.001
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6mpf0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nlr5m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k6pns"]
 size = Vector3(53.525, 50.44, 50)
@@ -298,6 +303,16 @@ mesh = SubResource("SphereMesh_bfqwq")
 [node name="ShapeCast3D" type="ShapeCast3D" parent="GravityBody3D"]
 shape = SubResource("CapsuleShape3D_6mpf0")
 
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("3_6mpf0")
+metadata/_custom_type_script = "uid://b6vx2r3r1mu0u"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("SphereShape3D_6mpf0")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CharacterBody3D"]
+mesh = SubResource("CylinderMesh_nlr5m")
+
 [node name="FreeLookCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9742679, 0.22539297, 0, -0.22539297, 0.9742679, -1.6294007, 3.8459277, 10.6842)
 script = ExtResource("6_y26re")
@@ -316,6 +331,7 @@ script = ExtResource("6_ryfo5")
 
 [node name="ShapeProvider" type="Node3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999976, 0, 0, 0)
+visible = false
 script = ExtResource("5_6mpf0")
 curve = SubResource("Curve3D_ndvhq")
 faces = 4
@@ -324,6 +340,5 @@ height = -5.0
 radius = 0.0
 
 [node name="DirectionProvider" type="Node3D" parent="."]
-visible = false
 script = ExtResource("7_nlr5m")
 gravity_direction = Vector3(-0.5, -0.5, 0)

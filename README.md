@@ -46,10 +46,13 @@ Before going into it, here's words and definitions:
 - Detector -> Area3D detecting body entering and asigning a Provider to it
 - GravityBody -> a RigidBody
 
-### GravityBody3D
+### GravityBody3D & GravityCharacter3D
 ![](media/gravitybody.png)
+![](media/gravitycharacter.png)
 
 The GravityBody3D is a RigidBody3D that can be influenced by our custom gravity. If you don't set the base gravity scale to zero, the body will be influenced by both the custom and the project's gravity. Call `get_custom_gravity` instead of `get_gravity` to get the applied gravity.
+
+The GravityCharacter3D is just a CharacterBody3D with the `get_custom_gravity` mechanics. Use it as you see fit.
 
 ### GravityDetector3D
 ![](media/gravitydetector.png)
