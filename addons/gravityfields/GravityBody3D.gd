@@ -1,4 +1,3 @@
-@tool
 @icon("res://addons/gravityfields/GravityBody3D.svg")
 class_name GravityBody3D extends RigidBody3D
 ## RigidBody3D influenced by the custom gravity
