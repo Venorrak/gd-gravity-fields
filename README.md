@@ -3,7 +3,7 @@
 
 ### ***For easy installation the addon's zip is in the release section***
 
-### ***⚠️ Only works on 4.5 for now***
+### ***⚠️ Only works on 4.5 and later versions***
 
 ## What is it ?
 It's an addon allowing you to easily implement custom gravity into your game.
