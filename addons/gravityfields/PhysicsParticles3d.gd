@@ -42,6 +42,7 @@ var pointsLifetime : PackedFloat32Array = []
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray = []
 	if not type_exists("DebugDraw3D"):
+		push_error("physics_particles require the debug_draw_3d addon go to https://github.com/DmitriySalnikov/godot_debug_draw_3d")
 		warnings.append("physics_particles require the debug_draw_3d addon go to https://github.com/DmitriySalnikov/godot_debug_draw_3d")
 	return warnings
 
@@ -54,9 +55,10 @@ func _ready() -> void:
 		_appendParticle()
 
 func _process(delta: float) -> void:
-	_updatePoints(delta)
-	DebugDraw3D.draw_box(global_position, Quaternion(global_basis), paritcleSpawnerSize, Color.RED)
-	DebugDraw3D.draw_points(points, Type, size, Color.PURPLE, delta)
+	if visible:
+		_updatePoints(delta)
+		DebugDraw3D.draw_box(global_position, Quaternion(global_basis), paritcleSpawnerSize, Color.RED)
+		DebugDraw3D.draw_points(points, Type, size, Color.PURPLE, delta)
 
 func _updatePoints(delta: float) -> void:
 	if not provider : return

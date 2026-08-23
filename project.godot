@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="gravity-fields"
 run/main_scene="uid://do7wo1cg7jrsb"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://dwqckqpsow0g1"
 
 [debug]

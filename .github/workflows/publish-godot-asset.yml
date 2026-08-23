@@ -1,0 +1,49 @@
+name: Publish to Godot Asset Store
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Package addon archive
+        run: |
+          ZIP_NAME="${{ secrets.ASSET_SLUG }}-${{ github.event.release.tag_name }}.zip"
+          git archive --format=zip --output "$GITHUB_WORKSPACE/$ZIP_NAME" HEAD
+          echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
+
+      - name: Write release notes to file
+        env:
+          RELEASE_BODY: ${{ github.event.release.body }}
+        run: |
+          # Written to a file rather than passed inline, since release notes
+          # can contain quotes/newlines that break shell argument passing.
+          printf '%s' "$RELEASE_BODY" > release_notes.txt
+
+      - name: Publish version to Asset Store
+        env:
+          GODOT_STORE_SESSION: ${{ secrets.GODOT_STORE_SESSION }}
+          ASSET_USER: ${{ secrets.ASSET_USER }}
+          ASSET_SLUG: ${{ secrets.ASSET_SLUG }}
+          MIN_GODOT_VERSION: ${{ secrets.MIN_GODOT_VERSION }}
+          MAX_GODOT_VERSION: ${{ secrets.MAX_GODOT_VERSION }}
+        run: |
+          chmod +x scripts/publish_godot_asset.sh
+          ZIP_NAME="${{ secrets.ASSET_SLUG }}-${{ github.event.release.tag_name }}.zip"
+          VERSION="${{ github.event.release.tag_name }}"
+          if [ "${#VERSION}" -lt 3 ]; then
+            echo "!! Release tag '$VERSION' is under 3 characters, the store will reject it." >&2
+            exit 1
+          fi
+          ./scripts/publish_godot_asset.sh \
+            "$ZIP_NAME" \
+            "$VERSION" \
+            "$(cat release_notes.txt)"
+

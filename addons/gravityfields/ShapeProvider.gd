@@ -31,9 +31,9 @@ var radius: float = 0
 func _ready() -> void:
 	curve.changed.connect(update_gizmos)
 
-func _get_property_list():
+func _get_property_list() -> Array[Dictionary]:
+	var ret: Array[Dictionary] = []
 	if Engine.is_editor_hint():
-		var ret = []
 		if multipleFaces:
 			ret.append({
 				"name": &"faces",
@@ -58,7 +58,7 @@ func _get_property_list():
 					"type": TYPE_FLOAT,
 					"usage": PROPERTY_USAGE_DEFAULT
 				})
-		return ret
+	return ret
 
 ## Get the custom gravity vector
 func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
@@ -74,6 +74,7 @@ func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
 	closest_transform = _rotate_by_provider(closest_transform, global_transform, false)
 	# Convert local_body_position to world position for gravity direction
 	var body_world_pos = global_transform.origin + local_body_position
+	
 	if multipleFaces:
 		var center: Vector3 = closest_transform.origin
 		var up: Vector3 = closest_transform.basis.y.normalized()
@@ -111,6 +112,7 @@ func get_custom_gravity(globalBodyPosition : Vector3) -> Vector3:
 			b = b.looking_at(forward.normalized(), gravity.normalized())
 			gravity = gravity.rotated(b.x.normalized(), -atan2(height, radius))
 		gravity *= _get_falloff(to_body.length())
+
 	else:
 		gravity = (closest_transform.origin - body_world_pos).normalized() * gravityForce * _get_falloff((closest_transform.origin - body_world_pos).length())
 	return gravity
