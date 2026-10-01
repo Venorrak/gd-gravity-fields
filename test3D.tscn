@@ -145,6 +145,7 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="pill_cylindre" unique_id=1845464209]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pill_cylindre/GravityDetector" unique_id=455170944]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -165,6 +166,7 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="cube" unique_id=1702333289]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cube/GravityDetector" unique_id=134625762]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -185,6 +187,7 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="platform" unique_id=176027870]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform/GravityDetector" unique_id=1963841975]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -204,6 +207,7 @@ priority = 9
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../../DirectionProvider")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform2/GravityDetector" unique_id=1324440793]
 shape = SubResource("BoxShape3D_ndvhq")
@@ -223,6 +227,7 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="pentagon" unique_id=232087791]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pentagon/GravityDetector" unique_id=251568173]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -243,6 +248,7 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="triangle" unique_id=2036045460]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="triangle/GravityDetector" unique_id=1617385171]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -261,6 +267,7 @@ mesh = SubResource("SphereMesh_6mpf0")
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../../SphereProvider")
+filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="sphere/GravityDetector" unique_id=888221557]
 shape = SubResource("SphereShape3D_ryfo5")
@@ -276,10 +283,9 @@ transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70
 visible = false
 mesh = SubResource("CylinderMesh_ryfo5")
 
-[node name="GravityBody3D" type="RigidBody3D" parent="." unique_id=206950552 node_paths=PackedStringArray("arrow")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.054740548, 2.3703153, 3.8444588)
+[node name="GravityBody3D" type="RigidBody3D" parent="." unique_id=206950552 node_paths=PackedStringArray("arrow") groups=["test"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.003522, 2.9879754, 0.5562837)
 gravity_scale = 0.0
-linear_velocity = Vector3(0, 0, -2)
 script = ExtResource("5_y26re")
 arrow = NodePath("ShapeCast3D")
 
@@ -307,7 +313,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9742679, 0.22539297, 0, -0.22539297, 0.974
 script = ExtResource("6_y26re")
 
 [node name="GravityDetector" type="Area3D" parent="." unique_id=1320095805 node_paths=PackedStringArray("gravityProvider")]
-visible = false
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../ShapeProvider")
@@ -345,6 +350,7 @@ metadata/_custom_type_script = "uid://5rlfepfmtvoq"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.306688, -6.952716, -12.771944)
 script = ExtResource("9_nlr5m")
 provider = NodePath("../ShapeProvider")
+representativeLength = true
 arrowMargin = 11.828
 zoneSize = Vector3(26.712, 25, 25)
 metadata/_custom_type_script = "uid://cyt1t0q0qte16"

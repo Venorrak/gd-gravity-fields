@@ -33,7 +33,7 @@ class_name PhysicsParticles3D extends Node3D
 ## How long will the particle be alive for ?
 @export var particleLifetime : float = 0.5
 ## Size of the zone withing which the particles will spawn
-@export var paritcleSpawnerSize : Vector3 = Vector3(1, 1, 1)
+@export var paritcleSpawnerSize : Vector3 = Vector3(10, 10, 10)
 ## List of all the positions of the points
 var points : PackedVector3Array = []
 ## List of the time left for each point

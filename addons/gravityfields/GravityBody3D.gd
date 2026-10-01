@@ -14,6 +14,7 @@ func get_custom_gravity() -> Vector3:
 		for i in _gravityDetectors.size():
 			var d = _gravityDetectors[i]
 			var p = d.gravityProvider
+			if not p: continue
 			match  d.gravity_space_override:
 				Area3D.SpaceOverride.SPACE_OVERRIDE_COMBINE:
 					v += p.get_custom_gravity(global_position)
