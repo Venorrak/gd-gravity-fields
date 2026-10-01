@@ -1,5 +1,5 @@
 @tool
-@icon("res://addons/gravityfields/PhysicsParticles3D.svg")
+@icon("res://addons/gravityfields/icons/PhysicsParticles3D.svg")
 class_name PhysicsParticles3D extends Node3D
 ## Helper particles for visualy seeing the effects of the gravity in the editor
 ##
@@ -55,7 +55,7 @@ func _ready() -> void:
 		_appendParticle()
 
 func _process(delta: float) -> void:
-	if visible:
+	if visible and enabled:
 		_updatePoints(delta)
 		DebugDraw3D.draw_box(global_position, Quaternion(global_basis), paritcleSpawnerSize, Color.RED)
 		DebugDraw3D.draw_points(points, Type, size, Color.PURPLE, delta)

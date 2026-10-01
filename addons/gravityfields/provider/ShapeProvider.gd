@@ -1,5 +1,5 @@
 @tool
-@icon("res://addons/gravityfields/ShapeProvider.svg")
+@icon("res://addons/gravityfields/icons/ShapeProvider.svg")
 class_name ShapeProvider extends GravityProvider
 ## Gravity provider for exotic shapes !
 

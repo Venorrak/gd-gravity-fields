@@ -1,9 +1,9 @@
 @tool
 extends EditorPlugin
 
-const shapeProviderGizmo = preload("res://addons/gravityfields/ShapeProviderGizmo.gd")
-const sphereProviderGizmo = preload("res://addons/gravityfields/SphereProviderGizmo.gd")
-const directionProviderGizmo = preload("res://addons/gravityfields/DirectionProviderGizmo.gd")
+const shapeProviderGizmo = preload("res://addons/gravityfields/gizmos/ShapeProviderGizmo.gd")
+const sphereProviderGizmo = preload("res://addons/gravityfields/gizmos/SphereProviderGizmo.gd")
+const directionProviderGizmo = preload("res://addons/gravityfields/gizmos/DirectionProviderGizmo.gd")
 var gizmo1 = shapeProviderGizmo.new()
 var gizmo2 = sphereProviderGizmo.new()
 var gizmo3 = directionProviderGizmo.new()

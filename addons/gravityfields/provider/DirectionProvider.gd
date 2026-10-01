@@ -1,5 +1,5 @@
 @tool
-@icon("res://addons/gravityfields/DirectionProvider.svg")
+@icon("res://addons/gravityfields/icons/DirectionProvider.svg")
 class_name DirectionProvider extends GravityProvider
 ## Gravity provider for planes
 

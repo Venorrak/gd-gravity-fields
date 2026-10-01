@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bvuuhf7kwhovt" path="res://addons/gravityfields/GravityDetector.gd" id="2_ou1c5"]
 [ext_resource type="Script" uid="uid://bsx0h0ya0tcn5" path="res://addons/gravityfields/GravityCharacter3D.gd" id="3_6mpf0"]
-[ext_resource type="Script" uid="uid://c2fx6x6of2i4j" path="res://addons/gravityfields/ShapeProvider.gd" id="5_6mpf0"]
+[ext_resource type="Script" uid="uid://c2fx6x6of2i4j" path="res://addons/gravityfields/provider/ShapeProvider.gd" id="5_6mpf0"]
 [ext_resource type="Script" uid="uid://5x2c3dafpknj" path="res://player3d.gd" id="5_y26re"]
-[ext_resource type="Script" uid="uid://ddw7ufcjj0xb0" path="res://addons/gravityfields/SphereProvider.gd" id="6_ryfo5"]
+[ext_resource type="Script" uid="uid://ddw7ufcjj0xb0" path="res://addons/gravityfields/provider/SphereProvider.gd" id="6_ryfo5"]
 [ext_resource type="Script" uid="uid://m4xwycrjbs8e" path="res://cam.gd" id="6_y26re"]
-[ext_resource type="Script" uid="uid://b80h5w123xnk4" path="res://addons/gravityfields/DirectionProvider.gd" id="7_nlr5m"]
-[ext_resource type="Script" uid="uid://5rlfepfmtvoq" path="res://addons/gravityfields/PhysicsParticles3d.gd" id="8_ryfo5"]
+[ext_resource type="Script" uid="uid://b80h5w123xnk4" path="res://addons/gravityfields/provider/DirectionProvider.gd" id="7_nlr5m"]
+[ext_resource type="Script" uid="uid://5rlfepfmtvoq" path="res://addons/gravityfields/visualisation/PhysicsParticles3d.gd" id="8_ryfo5"]
+[ext_resource type="Script" uid="uid://cyt1t0q0qte16" path="res://addons/gravityfields/visualisation/GravityArrows.gd" id="9_nlr5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bfqwq"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -306,6 +307,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9742679, 0.22539297, 0, -0.22539297, 0.974
 script = ExtResource("6_y26re")
 
 [node name="GravityDetector" type="Area3D" parent="." unique_id=1320095805 node_paths=PackedStringArray("gravityProvider")]
+visible = false
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../ShapeProvider")
@@ -332,10 +334,17 @@ script = ExtResource("7_nlr5m")
 gravity_direction = Vector3(-0.5, -0.5, 0)
 
 [node name="PhysicsParticles3D" type="Node3D" parent="." unique_id=618935181 node_paths=PackedStringArray("provider")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1038, 0, -9.584604)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8322, 0, -9.584604)
 script = ExtResource("8_ryfo5")
 provider = NodePath("../ShapeProvider")
-enabled = true
 nbOfParticles = 200
 paritcleSpawnerSize = Vector3(20, 20, 20)
 metadata/_custom_type_script = "uid://5rlfepfmtvoq"
+
+[node name="GravityArrows" type="Node3D" parent="." unique_id=1613732693 node_paths=PackedStringArray("provider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.306688, -6.952716, -12.771944)
+script = ExtResource("9_nlr5m")
+provider = NodePath("../ShapeProvider")
+arrowMargin = 11.828
+zoneSize = Vector3(26.712, 25, 25)
+metadata/_custom_type_script = "uid://cyt1t0q0qte16"

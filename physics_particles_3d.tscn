@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://b27ndjl28sy4"]
+[gd_scene format=3 uid="uid://b27ndjl28sy4"]
 
-[ext_resource type="Script" uid="uid://dl7uh0nr80sae" path="res://addons/gravityfields/PhysicsParticles3d.gd" id="1_ebgqo"]
-[ext_resource type="Script" uid="uid://cpko5ytng8ccr" path="res://cam.gd" id="2_8ohtj"]
-[ext_resource type="Script" uid="uid://doj8d8l77i5kj" path="res://addons/gravityfields/GravityDetector.gd" id="3_iwlkg"]
-[ext_resource type="Script" uid="uid://hkouu5kcc1un" path="res://addons/gravityfields/DirectionProvider.gd" id="4_iwlkg"]
-[ext_resource type="Script" uid="uid://x7jminosn7ba" path="res://addons/gravityfields/SphereProvider.gd" id="5_2w5ey"]
-[ext_resource type="Script" uid="uid://bn0etmpet1amx" path="res://addons/gravityfields/ShapeProvider.gd" id="6_1xfjs"]
+[ext_resource type="Script" uid="uid://5rlfepfmtvoq" path="res://addons/gravityfields/visualisation/PhysicsParticles3d.gd" id="1_ebgqo"]
+[ext_resource type="Script" uid="uid://m4xwycrjbs8e" path="res://cam.gd" id="2_8ohtj"]
+[ext_resource type="Script" uid="uid://bvuuhf7kwhovt" path="res://addons/gravityfields/GravityDetector.gd" id="3_iwlkg"]
+[ext_resource type="Script" uid="uid://b80h5w123xnk4" path="res://addons/gravityfields/provider/DirectionProvider.gd" id="4_iwlkg"]
+[ext_resource type="Script" uid="uid://ddw7ufcjj0xb0" path="res://addons/gravityfields/provider/SphereProvider.gd" id="5_2w5ey"]
+[ext_resource type="Script" uid="uid://c2fx6x6of2i4j" path="res://addons/gravityfields/provider/ShapeProvider.gd" id="6_1xfjs"]
+[ext_resource type="Script" uid="uid://cyt1t0q0qte16" path="res://addons/gravityfields/visualisation/GravityArrows.gd" id="7_dopvw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ohtj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -32,44 +33,56 @@ _data = {
 }
 point_count = 3
 
-[node name="PhysicsParticles3D" type="Node3D" node_paths=PackedStringArray("provider")]
+[node name="PhysicsParticles3D" type="Node3D" unique_id=1190219766 node_paths=PackedStringArray("provider")]
 script = ExtResource("1_ebgqo")
-provider = NodePath("GravityDetector/SphereProvider")
+provider = NodePath("GravityDetector/ShapeProvider")
 size = 0.1
 enabled = true
 nbOfParticles = 200
 particleLifetime = 1.0
 paritcleSpawnerSize = Vector3(20, 20, 20)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1881454755]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2111059428]
 environment = SubResource("Environment_iwlkg")
 
-[node name="FreeLookCamera" type="Camera3D" parent="."]
+[node name="FreeLookCamera" type="Camera3D" parent="." unique_id=823419483]
 script = ExtResource("2_8ohtj")
 
-[node name="GravityDetector" type="Area3D" parent="." node_paths=PackedStringArray("gravityProvider")]
+[node name="GravityDetector" type="Area3D" parent="." unique_id=1930598212 node_paths=PackedStringArray("gravityProvider")]
 gravity_space_override = 3
 gravity_point_center = Vector3(0, -1.045, 0)
 gravity_direction = Vector3(0, -1.045, 0)
 script = ExtResource("3_iwlkg")
 gravityProvider = NodePath("DirectionProvider")
 
-[node name="DirectionProvider" type="Node3D" parent="GravityDetector"]
+[node name="DirectionProvider" type="Node3D" parent="GravityDetector" unique_id=1769787314]
 visible = false
 script = ExtResource("4_iwlkg")
 
-[node name="SphereProvider" type="Node3D" parent="GravityDetector"]
+[node name="SphereProvider" type="Node3D" parent="GravityDetector" unique_id=689853073]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.68133, 13.360162, 14.368064)
+visible = false
 script = ExtResource("5_2w5ey")
 gravityFalloff = SubResource("Curve_5183w")
 
-[node name="ShapeProvider" type="Node3D" parent="GravityDetector"]
+[node name="ShapeProvider" type="Node3D" parent="GravityDetector" unique_id=1843027043]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36608, 4.5561647, 9.690553)
-visible = false
 script = ExtResource("6_1xfjs")
 curve = SubResource("Curve3D_6h0yd")
-multipleFaces = false
+faces = 4
+peak = true
+height = 5.0
+radius = 0.0
+
+[node name="GravityArrows" type="Node3D" parent="." unique_id=626429875 node_paths=PackedStringArray("provider")]
+script = ExtResource("7_dopvw")
+enabled = true
+provider = NodePath("../GravityDetector/ShapeProvider")
+representativeLength = false
+arrowMargin = 4.923
+zoneSize = Vector3(20, 20, 20)
+metadata/_custom_type_script = "uid://cyt1t0q0qte16"
