@@ -145,7 +145,6 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="pill_cylindre" unique_id=1845464209]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pill_cylindre/GravityDetector" unique_id=455170944]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -166,7 +165,6 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="cube" unique_id=1702333289]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cube/GravityDetector" unique_id=134625762]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -187,7 +185,6 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="platform" unique_id=176027870]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform/GravityDetector" unique_id=1963841975]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -207,7 +204,6 @@ priority = 9
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../../DirectionProvider")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platform2/GravityDetector" unique_id=1324440793]
 shape = SubResource("BoxShape3D_ndvhq")
@@ -227,7 +223,6 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="pentagon" unique_id=232087791]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pentagon/GravityDetector" unique_id=251568173]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -248,7 +243,6 @@ skeleton = NodePath("../..")
 [node name="GravityDetector" type="Area3D" parent="triangle" unique_id=2036045460]
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="triangle/GravityDetector" unique_id=1617385171]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -267,7 +261,6 @@ mesh = SubResource("SphereMesh_6mpf0")
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../../SphereProvider")
-filterType = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="sphere/GravityDetector" unique_id=888221557]
 shape = SubResource("SphereShape3D_ryfo5")
@@ -316,6 +309,8 @@ script = ExtResource("6_y26re")
 gravity_space_override = 3
 script = ExtResource("2_ou1c5")
 gravityProvider = NodePath("../ShapeProvider")
+filterType = 1
+filterList = PackedStringArray("test")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityDetector" unique_id=1949641248]
 shape = SubResource("BoxShape3D_k6pns")
